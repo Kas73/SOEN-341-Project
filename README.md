@@ -10,3 +10,5 @@ Omar Tawil - SSpaceApe
 Mitchel Scott-Bond - mitchelscottbond
 
 Ankita Ingle - ingleankita 
+
+Gabriel Brodeur - Kitchen Ace

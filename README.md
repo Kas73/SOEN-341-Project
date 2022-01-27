@@ -8,11 +8,11 @@ To implement a simplified version of Amazon (an online shopping website).
 
 ## Core features
 
-** Browsing for available items
+* Browsing for available items
 
-** Adding items to the shopping cart
+* Adding items to the shopping cart
 
-** Checking out
+* Checking out
 
 ## Team members
 

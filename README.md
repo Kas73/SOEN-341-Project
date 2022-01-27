@@ -2,18 +2,18 @@
 
 ## Team members:
 
-  * Kasra Kamjoo - Kas73
+* Kasra Kamjoo - Kas73
 
-  * Zachariya Javeri - zachariyaJaveri
+* Zachariya Javeri - zachariyaJaveri
 
-  * Hadjer Hamlat - HadjerHamlat
+* Hadjer Hamlat - HadjerHamlat
 
-  * Omar Tawil - SSpaceApe
+* Omar Tawil - SSpaceApe
 
-  * Mitchel Scott-Bond - mitchelscottbond
+* Mitchel Scott-Bond - mitchelscottbond
 
-  * Ankita Ingle - ingleankita 
+* Ankita Ingle - ingleankita 
 
-  * Gabriel Brodeur - Kitchen Ace
+* Gabriel Brodeur - Kitchen Ace
 
-  * Hugh McKenzie - hughmck
+* Hugh McKenzie - hughmck

@@ -9,9 +9,12 @@ An e-commerce web application that allows users to browse available items, add i
 
 ## Core features
 
-* Browsing for available items.
-* Adding items to the shopping cart.
-* Checking out.
+* Browsing for available items
+* Adding items to the shopping cart
+* Checking out
+
+## Technologies used
+The website will be built using the MERN (MongoDB, Express, React and Node) stack. The frontend user interface of the website will be built in React.js and it will use a NoSQL MongoDB database. 
 
 ## Team members
 

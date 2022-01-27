@@ -14,7 +14,7 @@ An e-commerce web application that allows users to browse available items, add i
 * Checking out
 
 ## Technologies used
-The website will be built using the MERN (MongoDB, Express, React and Node) stack. The frontend user interface of the website will be built in React.js and it will use a NoSQL MongoDB database. 
+The web application will be built using the MERN (MongoDB, Express, React and Node) stack. The frontend user interface of the website will be built in React.js and it will use a NoSQL MongoDB database. 
 
 ## Team members
 

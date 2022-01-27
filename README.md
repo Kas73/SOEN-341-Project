@@ -5,7 +5,7 @@
 To implement a simplified version of Amazon (an online shopping website).
 
 ## Description
-An e-commerce web application that allows users to browse available items, add items to a shopping cart and checkout their order.  
+An e-commerce web application that facilitates online shopping by allowing users to browse available items, add items to a shopping cart and checkout their order.  
 
 ## Core features
 

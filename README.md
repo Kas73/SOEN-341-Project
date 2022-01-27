@@ -1,6 +1,10 @@
 # SOEN 341 Project
 
-## Team members:
+## Objective
+
+To implement a simplified version of Amazon (an online shopping website).
+
+## Team members
 
 * Kasra Kamjoo - Kas73
 

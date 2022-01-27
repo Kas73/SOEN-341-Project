@@ -15,17 +15,10 @@ To implement a simplified version of Amazon (an online shopping website).
 ## Team members
 
 * Kasra Kamjoo - Kas73
-
 * Zachariya Javeri - zachariyaJaveri
-
 * Hadjer Hamlat - HadjerHamlat
-
 * Omar Tawil - SSpaceApe
-
 * Mitchel Scott-Bond - mitchelscottbond
-
-* Ankita Ingle - ingleankita 
-
+* Ankita Ingle - ingleankita
 * Gabriel Brodeur - Kitchen Ace
-
 * Hugh McKenzie - hughmck

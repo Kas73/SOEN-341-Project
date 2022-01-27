@@ -1,16 +1,19 @@
-# SOEN-341-Project
-Kasra Kamjoo - Kas73
+# SOEN 341 Project
 
-Zachariya Javeri - zachariyaJaveri
+## Team members:
 
-Hadjer Hamlat - HadjerHamlat
+  * Kasra Kamjoo - Kas73
 
-Omar Tawil - SSpaceApe
+  * Zachariya Javeri - zachariyaJaveri
 
-Mitchel Scott-Bond - mitchelscottbond
+  * Hadjer Hamlat - HadjerHamlat
 
-Ankita Ingle - ingleankita 
+  * Omar Tawil - SSpaceApe
 
-Gabriel Brodeur - Kitchen Ace
+  * Mitchel Scott-Bond - mitchelscottbond
 
-Hugh McKenzie - hughmck
+  * Ankita Ingle - ingleankita 
+
+  * Gabriel Brodeur - Kitchen Ace
+
+  * Hugh McKenzie - hughmck

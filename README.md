@@ -10,11 +10,11 @@ An e-commerce web application that allows users to browse available items, add i
 
 ## Core features
 
-** Browsing for available items
+ * Browsing for available items
 
-** Adding items to the shopping cart
+ * Adding items to the shopping cart
 
-** Checking out
+ * Checking out
 
 ## Technologies 
 

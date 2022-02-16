@@ -5,13 +5,16 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/Home';
 import AddNewProduct from './components/AddNewProduct';
 import Login from './components/Login';
+import ProductDetails from "./components/ProductDetails";
 
 const App = () => {
 	const [newProduct, setNewProduct] = useState({});
 	const [loginInfo, setLoginInfo] = useState({});
+	const [productDetails, setProductDetails] = useState({});
 
 	console.log(newProduct);
 	console.log(loginInfo);
+	console.log(productDetails)
 
 	return (
 		<BrowserRouter>
@@ -28,6 +31,11 @@ const App = () => {
 						exact
 						path='/login'
 						element={<Login setLoginInfo={setLoginInfo} />}
+					/>
+					<Route
+						exact
+						path='/details/:id'
+						element={<ProductDetails setProductInfo={setProductDetails} />}
 					/>
 				</Routes>
 			</div>

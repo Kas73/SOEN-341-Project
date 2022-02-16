@@ -1,4 +1,5 @@
 import React from 'react';
+import {useParams} from 'react-router-dom'
 
 const fakeData = {
     name: "A product!",
@@ -8,7 +9,7 @@ const fakeData = {
 }
 
 const ProductDetails = ({setProductDetails}) => {
-
+    const { id } = useParams();
 
 	return (
 		<div id='product_details'>
@@ -16,6 +17,7 @@ const ProductDetails = ({setProductDetails}) => {
             <p>Seller: {fakeData.seller}</p>
             <p>{fakeData.description}</p>
             <p>Price: ${fakeData.price}</p>
+            <p>Id: {id}</p>
 		</div>
 	);
 };

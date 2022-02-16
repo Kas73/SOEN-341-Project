@@ -15,6 +15,7 @@ const ProductDetails = ({setProductDetails}) => {
 			<h1>{fakeData.name}</h1>
             <p>Seller: {fakeData.seller}</p>
             <p>{fakeData.description}</p>
+            <p>Price: ${fakeData.price}</p>
 		</div>
 	);
 };

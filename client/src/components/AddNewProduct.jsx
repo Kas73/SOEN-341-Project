@@ -25,7 +25,9 @@ class AddNewProduct extends Component {
                             quantity_in_stock: 0, });
                     }
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    console.log(err)
+                });
         }
         else {
             console.log("Product name, price and quantity are required")
@@ -95,7 +97,7 @@ class AddNewProduct extends Component {
 				</div>
 				<div className='mb-3 form-check'></div>
 				<button
-					type='submit'
+					type='button'
 					className='btn btn-primary'
 					onClick={this.addProduct}
 				>

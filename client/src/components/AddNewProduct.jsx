@@ -81,6 +81,18 @@ class AddNewProduct extends Component {
 						onChange={this.updateProductPrice}
 					/>
 				</div>
+                <div className='mb-3'>
+					<label htmlFor='quantity' className='form-label'>
+						Quantity
+					</label>
+					<input
+                        type="number"
+						className='form-control'
+						id='quantity_in_stock'
+						value={quantity_in_stock}
+						onChange={this.updateQuantity}
+					/>
+				</div>
 				<div className='mb-3 form-check'></div>
 				<button
 					type='submit'

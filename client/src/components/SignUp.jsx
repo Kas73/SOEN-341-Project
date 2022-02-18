@@ -1,83 +1,112 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
-const SignUp = ({ setSignUp }) => {
-    const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-    const [firstname, setFirstName] = useState('');
-    const [lastname, setLastName] = useState('');
+class SignUp extends Component {
+	state = {
+        email: "",
+        password: "",
+        firstname: "",
+        lastname: "",
+    };
 
-	const handleSubmit2 = (event) => {
-		event.preventDefault();
+    createNewUser = () => {
+        const task = {
+            email: this.state.email,
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname
+        }
 
-		if (email === '' || password === '' || firstname ==='' || lastname ==='') {
-			if (email === '') alert('Invalid email!');
-			else if (password === '') alert('Invalid password');
-                else if (firstname === '') alert('Invalid firstname');
-                    else if (lastname === '') alert('Invalid lastname');
-		} else {
-			setSignUp({
-				email: email,
-				password: password,
-                firstname: firstname,
-                lastname: lastname,
-			});
+        if(task.email && task.password && task.firstname && task.lastname) {
+			//TODO implement request for creating new account
+			console.log(`New account: Email: ${task.email}, password: ${task.password}, firstname: ${task.firstname}, lastname: ${task.lastname}`)
 		}
-		setEmail('');
-		setPassword('');
-        setFirstName('');
-        setLastName('');
-	};
-    
-    return(
-    <main class="form-signup">
-        <form>
-            <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
-            
-            <div class="form-floating">
-            <input 
-                type="firstname" 
-                class="form-control" 
-                id="floatingInput" 
-                placeholder="First name"
-            />
-            <label for="floatingInput">First Name</label>
-            </div>
-            <div class="form-floating">
-            <input 
-                type="lastname" 
-                class="form-control" 
-                id="floatingInput" 
-                placeholder="Last name"
-            />
-            <label for="floatingInput">Last Name</label>
-            </div>
-            <div class="form-floating">
-            <input 
-                type="signup_email" 
-                class="form-control" 
-                id="floatingInput" 
-                placeholder="name@example.com"
-            />
-            <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-            <input 
-            type="signup_password" 
-            class="form-control" 
-            id="floatingPassword" 
-            placeholder="Password"/>
-            <label for="floatingPassword">Password</label>
-            </div>
-            <button
-					className='w-100 btn btn-lg btn-primary'
-					type='submit'
-					onClick={handleSubmit2}
-				>
-					Create Account
-			</button>
-        </form>
-    </main>
-    );
-};
+    }
+
+    updateEmail = (e) => {
+        this.setState({
+            email: e.target.value,
+        });
+    }
+
+    updatePassword = (e) => {
+        this.setState({
+            password: e.target.value,
+        });
+    }
+
+    updateFirstName = (e) => {
+        this.setState({
+            firstname: e.target.value,
+        })
+    }
+
+    updateLastName = (e) => {
+        this.setState({
+            lastname: e.target.value,
+        })
+    }
+
+    render() {
+        let { email, password, firstname, lastname } = this.state;
+        return (
+            <main className="form-signup">
+            <form>
+                <h1 className="h3 mb-3 fw-normal">Please Sign Up</h1>
+                
+                <div className="form-floating">
+                <input 
+                    type="firstname" 
+                    className="form-control" 
+                    id="firstname"
+                    value={firstname}
+                    placeholder="First name"
+                    onChange={this.updateFirstName}
+                />
+                <label htmlFor="firstname">First Name</label>
+                </div>
+                <div className="form-floating">
+                <input 
+                    type="lastname" 
+                    className="form-control" 
+                    id="lastname" 
+                    value={lastname}
+                    placeholder="Last name"
+                    onChange={this.updateLastName}
+                />
+                <label htmlFor="lastname">Last Name</label>
+                </div>
+                <div className="form-floating">
+                <input 
+                    type="signup_email" 
+                    className="form-control" 
+                    id="signup_email" 
+                    value={email}
+                    placeholder="name@example.com"
+                    onChange={this.updateEmail}
+                />
+                <label htmlFor="signup_email">Email address</label>
+                </div>
+                <div className="form-floating">
+                <input 
+                type="signup_password" 
+                className="form-control" 
+                id="signup_password" 
+                placeholder="Password"
+                value={password}
+                onChange={this.updatePassword}/>
+                <label htmlFor="signup_password">Password</label>
+                </div>
+                <button
+                        className='w-100 btn btn-lg btn-primary'
+                        type='button'
+                        onClick={this.createNewUser}
+                    >
+                        Create Account
+                </button>
+            </form>
+            </main>
+        )
+    }
+}
 
 export default SignUp;

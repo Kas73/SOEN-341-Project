@@ -8,8 +8,6 @@ import SignUp from './components/SignUp';
 import './App.css';
 
 const App = () => {
-	const [signupInfo, setSignUp] = useState({});
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -28,7 +26,7 @@ const App = () => {
           <Route
 						exact
 						path='/signup'
-						element={<SignUp setSignUp={setSignUp} />}
+						element={<SignUp />}
 					/>
         </Routes>
       </div>

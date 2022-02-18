@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import AddNewProduct from './AddNewProduct';
-import ProductList from './ProductList'
 import ListProducts from './ProductList';
 
 class Home extends Component {

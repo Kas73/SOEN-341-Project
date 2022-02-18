@@ -8,7 +8,6 @@ import SignUp from './components/SignUp';
 import './App.css';
 
 const App = () => {
-	const [loginInfo, setLoginInfo] = useState({});
 	const [signupInfo, setSignUp] = useState({});
 
   return (
@@ -24,7 +23,7 @@ const App = () => {
           <Route
 						exact
 						path='/login'
-						element={<Login setLoginInfo={setLoginInfo} />}
+						element={<Login />}
 					/>
           <Route
 						exact

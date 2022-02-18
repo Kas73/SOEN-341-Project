@@ -1,27 +1,39 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
-const Login = ({ setLoginInfo }) => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+class Login extends Component {
+	state = {
+        email: "",
+        password: "",
+    };
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+    signUserIn = () => {
+        const task = {
+            email: this.state.email,
+            password: this.state.password
+        }
 
-		if (email === '' || password === '') {
-			if (email === '') alert('Invalid email!');
-			else if (password === '') alert('Invalid password');
-		} else {
-			setLoginInfo({
-				email: email,
-				password: password,
-			});
+        if(task.email && task.password) {
+			//TODO implement request for email login
+			console.log(`Email: ${task.email}, password: ${task.password}`)
 		}
-		setEmail('');
-		setPassword('');
-	};
+    }
 
-	return (
-		<main className='form-signin'>
+    updateEmail = (e) => {
+        this.setState({
+            email: e.target.value,
+        });
+    }
+
+    updatePassword = (e) => {
+        this.setState({
+            password: e.target.value,
+        });
+    }
+
+    render() {
+        let { email, password } = this.state;
+        return (
+            <main className='form-signin'>
 			<form>
 				<h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
 
@@ -32,9 +44,7 @@ const Login = ({ setLoginInfo }) => {
 						id='floatingInput'
 						placeholder='name@example.com'
 						value={email}
-						onChange={(event) => {
-							setEmail(event.target.value);
-						}}
+						onChange={this.updateEmail}
 					/>
 					<label htmlFor='floatingInput'>Email address</label>
 				</div>
@@ -45,9 +55,7 @@ const Login = ({ setLoginInfo }) => {
 						id='floatingPassword'
 						placeholder='Password'
 						value={password}
-						onChange={(event) => {
-							setPassword(event.target.value);
-						}}
+						onChange={this.updatePassword}
 					/>
 					<label htmlFor='floatingPassword'>Password</label>
 				</div>
@@ -59,14 +67,15 @@ const Login = ({ setLoginInfo }) => {
 				</div>
 				<button
 					className='w-100 btn btn-lg btn-primary'
-					type='submit'
-					onClick={handleSubmit}
+					type='button'
+					onClick={this.signUserIn}
 				>
 					Sign in
 				</button>
 			</form>
 		</main>
-	);
-};
+        )
+    }
+}
 
 export default Login;

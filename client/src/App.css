@@ -39,3 +39,40 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+
+.form-signup {
+	width: 100%;
+	max-width: 330px;
+	padding: 100px 15px;
+	margin: auto;
+	text-align: center;
+}
+
+
+.form-signup .form-floating:focus-within {
+	z-index: 2;
+}
+
+.form-signup input[type='firstname'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signup input[type='lastname'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signup input[type='signup_email'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signup input[type='signup_password'] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

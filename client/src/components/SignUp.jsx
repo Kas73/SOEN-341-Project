@@ -28,34 +28,45 @@ const SignUp = ({ setSignUp }) => {
         setLastName('');
 	};
     
-    
-    return (
+    return(
+    <main class="form-signup">
         <form>
-            <h3>Sign Up</h3>
-            <div className="form-group">
-                <label>First name</label>
-                <input type="text" 
-                className="form-control" 
-                placeholder="First name" />
+            <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
+            
+            <div class="form-floating">
+            <input 
+                type="firstname" 
+                class="form-control" 
+                id="floatingInput" 
+                placeholder="First name"
+            />
+            <label for="floatingInput">First Name</label>
             </div>
-            <div className="form-group">
-                <label>Last name</label>
-                <input type="text" 
-                className="form-control" 
-                placeholder="Last name" />
+            <div class="form-floating">
+            <input 
+                type="lastname" 
+                class="form-control" 
+                id="floatingInput" 
+                placeholder="Last name"
+            />
+            <label for="floatingInput">Last Name</label>
             </div>
-            <div className="form-group">
-                <label>Email address</label>
-                <input 
+            <div class="form-floating">
+            <input 
                 type="signup_email" 
-                className="form-control" 
-                placeholder="Enter email" />
+                class="form-control" 
+                id="floatingInput" 
+                placeholder="name@example.com"
+            />
+            <label for="floatingInput">Email address</label>
             </div>
-            <div className="form-group">
-                <label>Password</label>
-                <input type="signup_password" 
-                className="form-control" 
-                placeholder="Enter password" />
+            <div class="form-floating">
+            <input 
+            type="signup_password" 
+            class="form-control" 
+            id="floatingPassword" 
+            placeholder="Password"/>
+            <label for="floatingPassword">Password</label>
             </div>
             <button
 					className='w-100 btn btn-lg btn-primary'
@@ -63,9 +74,10 @@ const SignUp = ({ setSignUp }) => {
 					onClick={handleSubmit2}
 				>
 					Create Account
-				</button>
+			</button>
         </form>
+    </main>
     );
-}
+};
 
 export default SignUp;

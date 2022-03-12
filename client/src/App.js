@@ -8,9 +8,6 @@ import SignUp from './components/SignUp';
 import './App.css';
 
 const App = () => {
-	const [loginInfo, setLoginInfo] = useState({});
-	const [signupInfo, setSignUp] = useState({});
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -24,12 +21,12 @@ const App = () => {
           <Route
 						exact
 						path='/login'
-						element={<Login setLoginInfo={setLoginInfo} />}
+						element={<Login />}
 					/>
           <Route
 						exact
 						path='/signup'
-						element={<SignUp setSignUp={setSignUp} />}
+						element={<SignUp />}
 					/>
         </Routes>
       </div>

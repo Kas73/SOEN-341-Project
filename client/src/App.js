@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./components/Home"
 import AddNewProduct from './components/AddNewProduct';
 import Navbar from "./components/layout/Navbar"
 import Login from "./components/Login"
 import SignUp from './components/SignUp';
+import Checkout from './components/Checkout';
 import './App.css';
 
 const App = () => {
@@ -28,6 +29,11 @@ const App = () => {
 						path='/signup'
 						element={<SignUp />}
 					/>
+          <Route
+            exact
+            path="/checkout"
+            element={<Checkout />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

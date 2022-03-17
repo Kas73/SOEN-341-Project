@@ -19,6 +19,7 @@ const SignUp = () => {
 	}
 
 	async function createNewUser() {
+		
 		const task = {
 			email: email,
 			password: password,
@@ -61,7 +62,7 @@ const SignUp = () => {
 	
 	return (
 		<main className='form-signup'>
-			<form onSubmit={createNewUser}>
+			<form>
 				<h1 className='h3 mb-3 fw-normal'>Please Sign Up</h1>
 
 				<div className='form-floating'>
@@ -144,7 +145,8 @@ const SignUp = () => {
 				<br></br>
 				<button
 					className='w-100 btn btn-lg btn-primary'
-					type='submit'
+					type='button'
+					onClick={createNewUser}
 				>
 					Create Account
 				</button>

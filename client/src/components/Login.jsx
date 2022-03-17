@@ -13,8 +13,7 @@ const Login = () => {
 		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
 	}
 
-	async function signUserIn(e) {
-		e.preventDefault();
+	async function signUserIn() {
 
 		const task = {
 			user_name: user_name,
@@ -51,7 +50,7 @@ const Login = () => {
 
 	return (
 		<main className='form-signin'>
-			<form onSubmit={signUserIn}>
+			<form>
 				<h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
 
 				<div className='form-floating'>
@@ -84,7 +83,8 @@ const Login = () => {
 				</div>
 				<button
 					className='w-100 btn btn-lg btn-primary'
-					type='submit'
+					type='button'
+					onClick={signUserIn}
 				>
 					Sign in
 				</button>

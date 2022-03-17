@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-class SignUp extends Component {
-	state = {
-		email: '',
-		password: '',
-		firstname: '',
-		lastname: '',
-		username: '',
-		address: '',
-		phoneNo: '',
-	};
+const SignUp = () => {
+	const navigation = useNavigate()
+	const [cookies, setCookie] = useCookies()
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [first_name, setFirstName] = useState('')
+	const [last_name, setLastName] = useState('')
+	const [user_name, setUserName] = useState('')
+	const [address, setAddress] = useState('')
+	const [phone_no, setPhoneNo] = useState('')
 
-	createNewUser = () => {
+	function createUserCookie() {
+		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
+	}
+
+	async function createNewUser() {
 		const task = {
-			email: this.state.email,
-			password: this.state.password,
-			first_name: this.state.firstname,
-			last_name: this.state.lastname,
-			user_name: this.state.username,
-			address: this.state.address,
-			phone_no: this.state.phoneNo,
+			email: email,
+			password: password,
+			first_name: first_name,
+			last_name: last_name,
+			user_name: user_name,
+			address: address,
+			phone_no: phone_no,
 		};
 
 		if (
@@ -32,23 +38,13 @@ class SignUp extends Component {
 			task.address &&
 			task.phone_no
 		) {
-			//TODO implement request for creating new account
-			console.log(
-				`New account: Email: ${task.email}, password: ${task.password}, firstname: ${task.firstname}, lastname: ${task.lastname}`
-			);
+			//Create new account and then redirect to home page with the new user logged in
 			axios
 				.post('/users', task)
 				.then((res) => {
 					if (res.data) {
-						this.setState({
-							email: '',
-							password: '',
-							firstname: '',
-							lastname: '',
-							username: '',
-							address: '',
-							phoneNo: '',
-						});
+						createUserCookie()
+						navigation('/')
 					}
 				})
 				.catch((err) => {
@@ -57,145 +53,105 @@ class SignUp extends Component {
 		}
 	};
 
-	updateEmail = (e) => {
-		this.setState({
-			email: e.target.value,
-		});
-	};
+	useEffect(() => {
+		if(cookies.user_name) {
+			navigation("/")
+		}
+	})	
+	
+	return (
+		<main className='form-signup'>
+			<form onSubmit={createNewUser}>
+				<h1 className='h3 mb-3 fw-normal'>Please Sign Up</h1>
 
-	updatePassword = (e) => {
-		this.setState({
-			password: e.target.value,
-		});
-	};
-
-	updateFirstName = (e) => {
-		this.setState({
-			firstname: e.target.value,
-		});
-	};
-
-	updateLastName = (e) => {
-		this.setState({
-			lastname: e.target.value,
-		});
-	};
-
-	updateUsername = (e) => {
-		this.setState({
-			username: e.target.value,
-		});
-	};
-
-	updateAddress = (e) => {
-		this.setState({
-			address: e.target.value,
-		});
-	};
-
-	updatePhoneNo = (e) => {
-		this.setState({
-			phoneNo: e.target.value,
-		});
-	};
-
-	render() {
-		let { email, password, firstname, lastname, username, address, phoneNo } =
-			this.state;
-		return (
-			<main className='form-signup'>
-				<form>
-					<h1 className='h3 mb-3 fw-normal'>Please Sign Up</h1>
-
-					<div className='form-floating'>
-						<input
-							type='firstname'
-							className='form-control'
-							id='firstname'
-							value={firstname}
-							placeholder='First name'
-							onChange={this.updateFirstName}
-						/>
-						<label htmlFor='firstname'>First Name</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='lastname'
-							className='form-control'
-							id='lastname'
-							value={lastname}
-							placeholder='Last name'
-							onChange={this.updateLastName}
-						/>
-						<label htmlFor='lastname'>Last Name</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='signup_email'
-							className='form-control'
-							id='signup_email'
-							value={email}
-							placeholder='name@example.com'
-							onChange={this.updateEmail}
-						/>
-						<label htmlFor='signup_email'>Email address</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='username'
-							className='form-control'
-							id='username'
-							value={username}
-							placeholder='Username'
-							onChange={this.updateUsername}
-						/>
-						<label htmlFor='username'>Username</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='signup_password'
-							className='form-control'
-							id='signup_password'
-							placeholder='Password'
-							value={password}
-							onChange={this.updatePassword}
-						/>
-						<label htmlFor='signup_password'>Password</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='address'
-							className='form-control'
-							id='address'
-							value={address}
-							placeholder='Address'
-							onChange={this.updateAddress}
-						/>
-						<label htmlFor='address'>Address</label>
-					</div>
-					<div className='form-floating'>
-						<input
-							type='phoneNo'
-							className='form-control'
-							id='phoneNo'
-							value={phoneNo}
-							placeholder='Phone No.'
-							onChange={this.updatePhoneNo}
-						/>
-						<label htmlFor='phoneNo'>Phone No.</label>
-					</div>
-					<br></br>
-					<button
-						className='w-100 btn btn-lg btn-primary'
-						type='button'
-						onClick={this.createNewUser}
-					>
-						Create Account
-					</button>
-				</form>
-			</main>
-		);
-	}
+				<div className='form-floating'>
+					<input
+						type='firstname'
+						className='form-control'
+						id='firstname'
+						value={first_name}
+						placeholder='First name'
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+					<label htmlFor='firstname'>First Name</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='lastname'
+						className='form-control'
+						id='lastname'
+						value={last_name}
+						placeholder='Last name'
+						onChange={(e) => setLastName(e.target.value)}
+					/>
+					<label htmlFor='lastname'>Last Name</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='signup_email'
+						className='form-control'
+						id='signup_email'
+						value={email}
+						placeholder='name@example.com'
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<label htmlFor='signup_email'>Email address</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='username'
+						className='form-control'
+						id='username'
+						value={user_name}
+						placeholder='Username'
+						onChange={(e) => setUserName(e.target.value)}
+					/>
+					<label htmlFor='username'>Username</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='signup_password'
+						className='form-control'
+						id='signup_password'
+						placeholder='Password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<label htmlFor='signup_password'>Password</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='address'
+						className='form-control'
+						id='address'
+						value={address}
+						placeholder='Address'
+						onChange={(e) => setAddress(e.target.value)}
+					/>
+					<label htmlFor='address'>Address</label>
+				</div>
+				<div className='form-floating'>
+					<input
+						type='phoneNo'
+						className='form-control'
+						id='phoneNo'
+						value={phone_no}
+						placeholder='Phone No.'
+						onChange={(e) => setPhoneNo(e.target.value)}
+					/>
+					<label htmlFor='phoneNo'>Phone No.</label>
+				</div>
+				<br></br>
+				<button
+					className='w-100 btn btn-lg btn-primary'
+					type='submit'
+				>
+					Create Account
+				</button>
+			</form>
+		</main>
+	);
+	
 }
 
 export default SignUp;

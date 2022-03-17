@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const productRoutes = require('./routes/products.routes');
 const userRoutes = require('./routes/users.routes');
+const cartsRoutes = require('./routes/carts.routes');
 require('dotenv').config();
 
 const app = express();
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use('/', productRoutes);
 app.use('/', userRoutes);
+app.use('/', cartsRoutes);
 
 app.use((err, req, res, next) => {
 	console.log(err);

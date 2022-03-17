@@ -1,6 +1,13 @@
 import React from 'react';
+import { useCookies } from 'react-cookie';
 
 const Navbar = () => {
+	const [cookies, setCookie, removeCookie] = useCookies();
+
+	function logOut() {
+		removeCookie('user_name');
+	}
+
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
 			<a className='navbar-brand' href='/'>
@@ -25,19 +32,29 @@ const Navbar = () => {
 							Home
 						</a>
 					</li>
+					{!cookies.user_name ? (
+						<React.Fragment>
+							<li className='nav-item'>
+								<a className='nav-link' href='/login'>
+									Login
+								</a>
+							</li>
+							<li className='nav-item'>
+								<a className='nav-link' href='/signup'>
+									Signup
+								</a>
+							</li>
+						</React.Fragment>
+					) : (
+						<li className='nav-item'>
+							<a className='nav-link' href='/create-product'>
+								Add Product (Admin)
+							</a>
+						</li>
+					)}
 					<li className='nav-item'>
-						<a className='nav-link' href='/login'>
-							Login
-						</a>
-					</li>
-					<li className='nav-item'>
-						<a className='nav-link' href='/signup'>
-							Signup
-						</a>
-					</li>
-					<li className='nav-item'>
-						<a className='nav-link' href='/create-product'>
-							Add Product (Admin)
+						<a className='nav-link' href='/cart'>
+							Cart
 						</a>
 					</li>
 				</ul>
@@ -61,6 +78,14 @@ const Navbar = () => {
 							Search
 						</button>
 					</div>
+					{cookies.user_name ? (
+						<div className='col'>
+							<p>Logged in as: {cookies.user_name}</p>
+							<button className='btn' type='button' onClick={logOut}>
+								Logout
+							</button>
+						</div>
+					) : null}
 				</div>
 			</form>
 		</nav>

@@ -1,6 +1,7 @@
 #add-new-product-form,
 #product_details,
-#home {
+#home,
+#cart-row {
 	padding: 2% 5%;
 }
 
@@ -40,7 +41,6 @@
 	border-top-right-radius: 0;
 }
 
-
 .form-signup {
 	width: 100%;
 	max-width: 330px;
@@ -48,7 +48,6 @@
 	margin: auto;
 	text-align: center;
 }
-
 
 .form-signup .form-floating:focus-within {
 	z-index: 2;
@@ -75,4 +74,13 @@
 	margin-bottom: 10px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+.cart {
+	padding: 0 30%;
+}
+
+.right-align {
+	position: relative;
+	float: right;
 }

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie';
 
 const Navbar = () => {
-	const [cookies, setCookie, removeCookie] = useCookies()
+	const [cookies, setCookie, removeCookie] = useCookies();
 
 	function logOut() {
-		removeCookie("user_name")
+		removeCookie('user_name');
 	}
 
 	return (
@@ -32,25 +32,31 @@ const Navbar = () => {
 							Home
 						</a>
 					</li>
-					{!cookies.user_name ? <React.Fragment>
+					{!cookies.user_name ? (
+						<React.Fragment>
+							<li className='nav-item'>
+								<a className='nav-link' href='/login'>
+									Login
+								</a>
+							</li>
+							<li className='nav-item'>
+								<a className='nav-link' href='/signup'>
+									Signup
+								</a>
+							</li>
+						</React.Fragment>
+					) : (
+						<li className='nav-item'>
+							<a className='nav-link' href='/create-product'>
+								Add Product (Admin)
+							</a>
+						</li>
+					)}
 					<li className='nav-item'>
-						<a className='nav-link' href='/login'>
-							Login
+						<a className='nav-link' href='/cart'>
+							Cart
 						</a>
 					</li>
-					<li className='nav-item'>
-						<a className='nav-link' href='/signup'>
-							Signup
-						</a>
-					</li>
-					</React.Fragment>
-					:
-					<li className='nav-item'>
-						<a className='nav-link' href='/create-product'>
-							Add Product (Admin)
-						</a>
-					</li>
-					}
 				</ul>
 			</div>
 
@@ -72,16 +78,14 @@ const Navbar = () => {
 							Search
 						</button>
 					</div>
-					{cookies.user_name ? 
+					{cookies.user_name ? (
 						<div className='col'>
 							<p>Logged in as: {cookies.user_name}</p>
-							<button className='btn'
-								type='button'
-								onClick={logOut}>
-									Logout
-								</button>
+							<button className='btn' type='button' onClick={logOut}>
+								Logout
+							</button>
 						</div>
-					: null }
+					) : null}
 				</div>
 			</form>
 		</nav>

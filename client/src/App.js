@@ -6,6 +6,7 @@ import Navbar from "./components/layout/Navbar"
 import Login from "./components/Login"
 import SignUp from './components/SignUp';
 import Checkout from './components/Checkout';
+import Detailespage from './components/Detailspage';
 import './App.css';
 
 const App = () => {
@@ -33,6 +34,11 @@ const App = () => {
             exact
             path="/checkout"
             element={<Checkout />}
+          />
+          <Route 
+          exact
+          path="/detailspage/:id"
+          element={<Detailespage/>}
           />
         </Routes>
       </div>

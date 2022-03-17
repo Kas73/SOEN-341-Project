@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import AddNewProduct from './AddNewProduct';
 import ListProducts from './ProductList';
 
-class Home extends Component {
-	state = {
-		products: [],
-	};
-
-	componentDidMount() {
-		this.getProducts();
-	}
+const Home = () => {
+	const [products, setProducts] = useState([]);
 	
-	getProducts = () => {
-		axios
-			.get('/products')
-			.then((res) => {
-				if(res.data) {
-					this.setState({
-						products: res.data
-					});
-				}
-			})
-			.catch((err) => console.log(err))
-	}
+	useEffect(() => {
+		async function getProducts() {
+			const response = await axios
+				.get('/products')
+			
+			if(!response.data) {
+				window.alert("Error while getting products")
+				return
+			}
 
-	render () {
-		let {products} = this.state;
+			setProducts(response.data)
+		}
 
-		return(
-			<div id='home'>
-				<h1>HOME</h1>
-				<ListProducts products={products} />
-			</div>
-		)
-	}
+		getProducts()
+		return;
+	}, [])
+
+	return(
+		<div id='home'>
+			<h1>HOME</h1>
+			<ListProducts products={products} />
+		</div>
+	)
 };
 
 export default Home;

@@ -2,9 +2,6 @@ import React from 'react';
 
 const ListProducts = ({products}) => {
     return (
-        
-        
-           
         <div className="grid-container">
             <main className="row">
                 
@@ -13,7 +10,7 @@ const ListProducts = ({products}) => {
                     return (
                         <div key={product._id} className ="card">
                             <a href={`/product/${product._id}`}>
-                            <img src="" alt= {product.product_name} />
+                            <img src={product.product_img} alt={product.product_name} />
                             </a>
                             <div className="card-body"> 
                             <a href={`/product/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>

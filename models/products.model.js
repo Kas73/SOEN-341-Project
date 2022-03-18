@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const ProductSchema = new Schema({
     product_name: String,
     product_price: Number,
-    quantity_in_stock: Number
+    description: String,
+    seller_name: String,
+    product_img: String
 })
 
 const Products = mongoose.model('products', ProductSchema);

@@ -26,7 +26,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(express.json());
+app.use(express.json({limit: '6mb'}));
+app.use(express.urlencoded({limit: '6mb'}))
 app.use('/', productRoutes);
 app.use('/', userRoutes);
 app.use('/', cartsRoutes);

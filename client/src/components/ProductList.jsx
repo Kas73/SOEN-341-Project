@@ -12,11 +12,11 @@ const ListProducts = ({products}) => {
                 products.map((product) => {
                     return (
                         <div key={product._id} className ="card">
-                            <a href={`/product/${product._id}`}>
+                            <a href={`/details/${product._id}`}>
                             <img src="" alt= {product.product_name} />
                             </a>
                             <div className="card-body"> 
-                            <a href={`/product/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>
+                            <a href={`/details/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>
                         </div>
                     )
                 })

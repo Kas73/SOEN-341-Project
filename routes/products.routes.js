@@ -12,7 +12,6 @@ router.get("/products", (req, res, next) => {
 });
 
 router.post("/products", (req, res, next) => {
-  //console.log(`Name: ${req.body.product_name}, price: ${req.body.product_price}, quantity: ${req.body.quantity_in_stock}`)
   if(req.body.product_name && req.body.product_price && req.body.description && req.body.seller_name && req.body.product_img) {
     Products.create({
         product_name: req.body.product_name,

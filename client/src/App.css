@@ -1,6 +1,7 @@
 #add-new-product-form,
 #product_details,
-#home {
+#home,
+#cart-row {
 	padding: 2% 5%;
 }
 
@@ -40,7 +41,6 @@
 	border-top-right-radius: 0;
 }
 
-
 .form-signup {
 	width: 100%;
 	max-width: 330px;
@@ -48,7 +48,6 @@
 	margin: auto;
 	text-align: center;
 }
-
 
 .form-signup .form-floating:focus-within {
 	z-index: 2;
@@ -76,3 +75,90 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+.grid-container {
+	display: grid;
+	grid-template-areas: 'main';
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	height: 100%
+}
+main{
+	grid-area: main;
+	padding: 1rem;
+	background-color: lightgray;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  border: 0.1rem white solid;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin: 0.2rem;
+}
+.card-body {
+  padding: 0.5rem; 
+	margin-bottom: 0.2rem;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: orangered;
+}
+
+img {
+  border-radius: 0.5rem;
+	max-width: 29rem;
+  width: 100%;
+}
+.cart {
+	padding: 0 30%;
+}
+
+.right-align {
+	position: relative;
+	float: right;
+}
+
+
+/****************Product Details CSS**/
+body{
+    background-color: #edf1f5;
+    margin-top:20px;
+}
+.card {
+    margin-bottom: 30px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.card .card-subtitle {
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #8898aa;
+}
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f3f8fa!important
+}
+.table-product td{
+    border-top: 0px solid #dee2e6 !important;
+    color: #728299!important;
+}
+  /********Product Details CSS Close**/

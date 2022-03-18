@@ -7,7 +7,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Checkout from './components/Checkout';
 import Cart from './components/Cart';
-import Detailspage from './components/Detailspage';
+import DetailsPage from './components/DetailsPage';
 
 import './App.css';
 
@@ -23,7 +23,7 @@ const App = () => {
 					<Route exact path='/signup' element={<SignUp />} />
 					<Route exact path='/checkout' element={<Checkout />} />
 					<Route exact path='/cart' element={<Cart />} />
-          <Route exactpath="/detailspage/:id"element={<Detailspage/>}
+          <Route exact path="/DetailsPage/:id"element={<DetailsPage/>}
           />
 				</Routes>
 			</div>

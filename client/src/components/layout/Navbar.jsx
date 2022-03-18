@@ -1,11 +1,14 @@
 import React from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 	const [cookies, setCookie, removeCookie] = useCookies();
+	const navigation = useNavigate()
 
 	function logOut() {
 		removeCookie('user_name');
+		navigation('/')
 	}
 
 	return (

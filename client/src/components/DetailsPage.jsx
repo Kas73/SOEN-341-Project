@@ -7,21 +7,19 @@ const DetailsPage = () => {
     const {id} = useParams();
 
     useEffect(() => {
-		async function getProducts() {
+		async function getProduct() {
 			const response = await axios
 				.get('/products/'+ id)
 
 			if(!response.data) {
-				window.alert("Error while getting products")
+				window.alert("Could not find product with id: " + id)
 				return
 			}
 
 			setProduct(response.data)
 		}
 
-		getProducts()
-        console.log(product);
-        console.log(id);
+		getProduct()
 		return;
 	}, [])
 
@@ -33,25 +31,18 @@ const DetailsPage = () => {
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">{product.product_name}</h3>
-                    <h6 class="card-subtitle">Placeholder for small description</h6>
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-6">
-                            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></img></div>
+                            <div class="white-box text-center"><img src={product.product_img} class="img-responsive"></img></div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <h4 class="box-title mt-5">Product description</h4>
-                            <p>Random Gibberish about the product</p>
+                            <p>{product.description}</p>
                             <h2 class="mt-5">
                                 {product.product_price}<small class="text-success"></small>
                             </h2>
 
                             <button class="btn btn-primary btn-rounded">Add to cart</button>
-                            <h3 class="box-title mt-5">Key Highlights</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-                                <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-                                <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
-                            </ul>
                         </div>
 
                     </div>

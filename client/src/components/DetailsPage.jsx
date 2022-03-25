@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const DetailsPage = () => {
     const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [cookies, setCookie] = useCookies();
     const {id} = useParams();
+    const navigation = useNavigate();
 
     useEffect(() => {
 		async function getProduct() {
@@ -22,8 +26,61 @@ const DetailsPage = () => {
 		getProduct()
 		return;
 	}, [])
+    
+    async function addToCart() {
+        if(!cookies.user_name) {
+            window.alert("Please sign in to add to cart");
+            navigation("/login")
+        }
 
+        const response = await axios.get(`/carts/${cookies.user_name}`)
 
+        if(response.data) {
+            //The cart already exists
+            const cart = response.data.cart;
+            const itemInCart = cart.find(obj => obj.product_name == product.product_name)
+
+            if(itemInCart) {
+                //This product is already a part of their cart
+                itemInCart.quantity = itemInCart.quantity + quantity
+            }
+            else {
+                cart.push({
+                    product_name: product.product_name,
+                    price: product.product_price,
+                    quantity: quantity
+                })
+            }
+
+            const task = {
+                cart: cart,
+                user_name: cookies.user_name
+            }
+            const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+
+            if(updateResponse.data) {
+                window.alert("Cart has been updated!")
+                navigation("/cart")
+            }
+        }
+        else {
+            const task = {
+                cart: [{
+                    product_name: product.product_name,
+                    price: product.product_price,
+                    quantity: quantity
+                }],
+                user_name: cookies.user_name
+            }
+
+            const response = await axios.post(`/carts`, task)
+
+            if(response.data) {
+                window.alert("Item added to cart!")
+                navigation("/cart")
+            }
+        }
+    }
 
     return(
 
@@ -39,10 +96,18 @@ const DetailsPage = () => {
                             <h4 class="box-title mt-5">Product description</h4>
                             <p>{product.description}</p>
                             <h2 class="mt-5">
-                                {product.product_price}<small class="text-success"></small>
+                                ${product.product_price}<small class="text-success"></small>
                             </h2>
-
-                            <button class="btn btn-primary btn-rounded">Add to cart</button>
+                            <button onClick={(e) => setQuantity(quantity + 1)}>+</button>
+                            <input
+                                type="number"
+                                id='quantity'
+                                min="1"
+                                value={quantity}
+                                onChange={(e) => setQuantity(e.target.value)}
+                            />
+				            <button onClick={(e) => setQuantity(quantity - 1)}>-</button>
+                            <button class="btn btn-primary btn-rounded" onClick={addToCart}>Add to cart</button>
                         </div>
 
                     </div>

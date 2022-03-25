@@ -6,30 +6,21 @@ const Carts = require('../models/carts.model');
 router.get('/carts', (req, res, next) => {
 	Carts.find({})
 		.then((data) => {
-			console.log('RECEIVED DATA: ' + data);
+			console.log('Got cart: ' + data);
 			res.json(data);
 		})
 		.catch(next);
 });
 
 router.get('/carts/:user_name', (req, res, next) => {
-	console.log(`Username: ${req.params.user_name}, Cart: ${req.params.cart}`);
+	console.log(`Getting cart for Username: ${req.params.user_name}`);
 	Carts.findOne({ user_name: req.params.user_name })
 		.then((data) => {
-			console.log('RECEIVED DATA: ' + data);
+			console.log('Got cart for ' + req.params.user_name + ': ' + data);
 			res.json(data);
 		})
 		.catch(next);
 });
-
-// router.update('/cart/:name', (req, res, next) => {
-// 	Cart.findOneAndUpdate({ name: req.params.name })
-// 		.then((data) => {
-// 			console.log('RECEIVED DATA: ' + data);
-// 			res.json(data);
-// 		})
-// 		.catch(next);
-// });
 
 router.post('/carts', (req, res, next) => {
 	if (req.body.cart && req.body.user_name) {
@@ -39,6 +30,21 @@ router.post('/carts', (req, res, next) => {
 		})
 			.then((data) => res.json(data))
 			.catch(next);
+	} else {
+		res.json({
+			error: 'Name or price is empty',
+		});
+	}
+});
+
+router.patch('/carts/:user_name', (req, res, next) => {
+	console.log(`Updating cart for ${req.params.user_name} with following data: ` + JSON.stringify(req.body.cart))
+	if (req.body.cart && req.params.user_name) {
+		Carts.findOneAndUpdate({user_name: req.body.user_name}, {
+			cart: req.body.cart
+		})
+		.then((data) => res.json(data))
+		.catch(next);
 	} else {
 		res.json({
 			error: 'Name or price is empty',

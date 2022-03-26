@@ -43,6 +43,35 @@ function Cart() {
 		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
 	}
 
+	async function incrementQuantity(product_name) {
+		let newCart = cart
+		newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity++
+		console.log("After filter: " + JSON.stringify(newCart))
+		
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+		setCart(newCart)
+
+		navigation('/cart')
+	}
+
+	async function decrementQuantity(product_name) {
+		let newCart = cart
+		newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity--
+		
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+		setCart(newCart)
+
+		navigation('/cart')
+	}
+
 	return (
 		<div className='cart'>
 			<br></br>
@@ -69,6 +98,8 @@ function Cart() {
 							<CartRow
 								item={item}
 								onRemove={removeFromCart}
+								onIncrement={incrementQuantity}
+								onDecrement={decrementQuantity}
 							/>
 						);
 					}) :

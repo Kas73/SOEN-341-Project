@@ -1,52 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CartRow from './CartRow';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
-	// const data = [
-	// 	{
-	// 		name: 'Apples',
-	// 		price: '0.99',
-	// 		quantity: 5,
-	// 	},
-	// 	{
-	// 		name: 'Mangoes',
-	// 		price: '0.98',
-	// 		quantity: 2,
-	// 	},
-	// 	{
-	// 		name: 'Bananas',
-	// 		price: '0.79',
-	// 		quantity: 3,
-	// 	},
-	// 	{
-	// 		name: 'Strawberries',
-	// 		price: '1.59',
-	// 		quantity: 1,
-	// 	},
-	// ];
+	const [cart, setCart] = useState({});
+	const [cookies, setCookie] = useCookies();
+	const navigation = useNavigate();
 
-	async function addNewCart() {
-		const task = {
-			cart: [
-				{ product_name: 'Demo', price: 0.99, quantity: 5 },
-				{ product_name: 'Demo', price: 0.99, quantity: 5 },
-			],
-			user_name: 'ABCDE',
-		};
 
-		if (task.user_name && task.cart) {
-			axios
-				.post(`/carts`, task)
-				.then((res) => {
-					if (res.data) {
-						console.log('Item added successfully.');
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+	useEffect(() => {
+		if(!cookies.user_name) {
+			window.alert("You must sign in to see your cart")
+			navigation("/login")
 		}
+
+		async function getUserCart() {
+			const response = await axios
+				.get(`/carts/${cookies.user_name}`)
+			
+			if(!response.data) {
+				window.alert("Error while getting products")
+				return
+			}
+
+			console.log(JSON.stringify(response.data.cart))
+			setCart(response.data.cart)
+		}
+
+		getUserCart();
+		return;
+	}, [])
+
+	async function removeFromCart(product_name) {
+		let newCart = cart.filter(cartItem => cartItem.product_name != product_name)
+		setCart(newCart)
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+	}
+
+	async function incrementQuantity(product_name) {
+		let newCart = cart
+		newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity++
+		console.log("After filter: " + JSON.stringify(newCart))
+		
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+		setCart(newCart)
+
+		navigation('/cart')
+	}
+
+	async function decrementQuantity(product_name) {
+		let newCart = cart
+		newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity--
+		
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+		setCart(newCart)
+
+		navigation('/cart')
 	}
 
 	return (
@@ -69,14 +92,18 @@ function Cart() {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {data.map((item) => {
+					{ cart && cart.length > 0 ?
+					cart.map((item) => {
 						return (
 							<CartRow
-								
+								item={item}
+								onRemove={removeFromCart}
+								onIncrement={incrementQuantity}
+								onDecrement={decrementQuantity}
 							/>
 						);
-					})} */}
-					<CartRow />
+					}) :
+					null}
 				</tbody>
 			</table>
 			<br></br>
@@ -84,13 +111,6 @@ function Cart() {
 			<a href='/checkout'>
 				<button className='btn btn-primary right-align w-100'>Checkout</button>
 			</a>
-			<button
-				className='btn btn-primary right-align w-100'
-				onClick={addNewCart}
-				type='button'
-			>
-				Add to cart
-			</button>
 		</div>
 	);
 }

@@ -33,6 +33,16 @@ function Cart() {
 		return;
 	}, [])
 
+	async function removeFromCart(product_name) {
+		let newCart = cart.filter(cartItem => cartItem.product_name != product_name)
+		setCart(newCart)
+		const task = {
+			cart: newCart,
+			user_name: cookies.user_name
+		}
+		const updateResponse = await axios.patch(`/carts/${cookies.user_name}`, task);
+	}
+
 	return (
 		<div className='cart'>
 			<br></br>
@@ -58,6 +68,7 @@ function Cart() {
 						return (
 							<CartRow
 								item={item}
+								onRemove={removeFromCart}
 							/>
 						);
 					}) :

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const CartRow = ({item}) => {
-	console.log(JSON.stringify(item))
+const CartRow = ({item, onRemove}) => {
+
 	return (
 		<tr>
 			<td colspan='4'>
@@ -16,7 +16,7 @@ const CartRow = ({item}) => {
 			<td colspan='4' className='right-align'>
 				<button className='btn btn-dark'>+</button>{' '}
 				<button className='btn btn-dark'>-</button>{' '}
-				<button className='btn btn-dark'>🗑️</button>{' '}
+				<button className='btn btn-dark' onClick={(e) => onRemove(item.product_name)}>🗑️</button>{' '}
 			</td>
 		</tr>
 	);

@@ -32,7 +32,8 @@ router.post('/users', (req, res, next) => {
 		req.body.first_name &&
 		req.body.last_name &&
 		req.body.address &&
-		req.body.phone_no
+		req.body.phone_no &&
+		req.body.payment_method
 	) {
 		Users.create({
 			user_name: req.body.user_name,
@@ -42,6 +43,7 @@ router.post('/users', (req, res, next) => {
 			last_name: req.body.last_name,
 			address: req.body.address,
 			phone_no: req.body.phone_no,
+			payment_method: req.body.payment_method,
 		})
 			.then((data) => res.json(data))
 			.catch(next);

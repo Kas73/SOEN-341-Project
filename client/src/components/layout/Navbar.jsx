@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 	const [cookies, setCookie, removeCookie] = useCookies();
 	const navigation = useNavigate()
-
+	const [searchString, setSearchString]= useState("");
 	function logOut() {
 		removeCookie('user_name');
 		navigation('/')
 	}
+
+
 
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -71,14 +73,19 @@ const Navbar = () => {
 							type='search'
 							placeholder='Search'
 							aria-label='Search'
+							value={searchString}
+							onChange={(e)=>setSearchString(e.target.value)}
 						/>
 					</div>
 					<div className='col'>
 						<button
 							className='btn btn-outline-success my-2 my-sm-0'
-							type='submit'
+							type='button'
+							
 						>
+							<a className='nav-link' href={`/search-results/${searchString}`}>
 							Search
+							</a>
 						</button>
 					</div>
 					{cookies.user_name ? (

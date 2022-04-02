@@ -20,6 +20,15 @@ router.get("/products/:id", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/products-search/:query", (req, res, next) => {
+  Products.find({ product_name: req.params.query})
+    .then((data) => {
+      console.log("RECEIVED DATA: " + data)
+      res.json(data)
+    })
+    .catch(next);
+});
+
 router.post("/products", (req, res, next) => {
   if(req.body.product_name && req.body.product_price && req.body.description && req.body.seller_name && req.body.product_img) {
     Products.create({

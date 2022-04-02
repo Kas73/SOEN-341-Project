@@ -32,8 +32,7 @@ router.post('/users', (req, res, next) => {
 		req.body.first_name &&
 		req.body.last_name &&
 		req.body.address &&
-		req.body.phone_no &&
-		req.body.payment_method
+		req.body.phone_no
 	) {
 		Users.create({
 			user_name: req.body.user_name,

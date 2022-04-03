@@ -1,12 +1,23 @@
 import React from 'react';
 
-const ListProducts = ({products}) => {
+const ListProducts = ({products, categoryFilter}) => {
+   // console.log(products);
+    //console.log(categoryFilter);
+    var filtered = products;
+    if(categoryFilter.length!=0){
+        var filtered = products.filter((e)=>{return this.categories.indexof(e)}, categoryFilter);
+        
+    }
+    
     return (
         <div className="grid-container">
             <main className="row">
                 
-            {products && products.length > 0 ? (
-                products.map((product) => {
+            {filtered && filtered.length > 0 ? (
+              
+                filtered.map((product) => {
+                   // console.log(product.categories);
+                   
                     return (
                         <div key={product._id} className ="card">
                             <a href={`/details/${product._id}`}>
@@ -16,7 +27,9 @@ const ListProducts = ({products}) => {
                             <a href={`/details/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>
                         </div>
                     )
+                   
                 })
+            
             ) : (
                 <li>No Products(s) available</li>
             )}

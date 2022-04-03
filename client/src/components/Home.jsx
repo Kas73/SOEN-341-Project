@@ -1,10 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import ListProducts from './ProductList';
+import { useChecklist } from 'react-checklist';
 
 const Home = () => {
 	const [products, setProducts] = useState([]);
-	
+	const [categories, setCategories] = useState([]);
+	const [checkedState, setCheckedState] = useState([]);
+	const [selectedCategories, setSelectedCategories] = useState([]);
+
+	useEffect(() => {
+		async function getCategories() {
+			const response = await axios
+				.get('/categories')
+			
+			if(!response.data) {
+				window.alert("Error while getting categories")
+				return
+			}
+
+			setCategories(response.data)
+			setCheckedState(new Array(categories.length).fill(false))
+		}
+
+		const updatedSelectedCategories = [];
+        categories.filter((item, index)=>{
+            if(checkedState[index]){
+                updatedSelectedCategories.push(item.category_name);
+            }
+        });
+
+		setSelectedCategories(updatedSelectedCategories);
+
+		getCategories()
+		return;
+	}, [])
+
 	useEffect(() => {
 		async function getProducts() {
 			const response = await axios
@@ -22,10 +53,46 @@ const Home = () => {
 		return;
 	}, [])
 
+
+	
+
+	function handleCheck (position) {
+		const updatedCheckedState = checkedState.map((item, index)=>
+		index === position ? !item : item
+		);
+		
+		setCheckedState(updatedCheckedState);
+		
+		
+		console.log(selectedCategories)
+		//console.log(checkedState);
+		//console.log(position);
+	}
+
 	return(
 		<div id='home'>
 			<h1>HOME</h1>
-			<ListProducts products={products} />
+			<h4>Categories</h4>
+			<main className="row">
+			{categories && categories.length > 0 ? (
+				
+				categories.map((v, i) => (
+					<li key={i}>
+						<input
+						type="checkbox"
+						data-key={v._id}                  
+						onChange={(e)=>handleCheck(i)}            
+						checked={checkedState[i]} 
+						/>
+						<label>{v.category_name}</label>
+					</li>
+				))
+				): (
+					<li>No Categories</li>
+				)}
+				</main>
+				
+			<ListProducts products={products} categoryFilter={selectedCategories} />
 		</div>
 	)
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import ListProducts from './ProductList';
-import { useChecklist } from 'react-checklist';
 
 const Home = () => {
 	const [products, setProducts] = useState([]);
@@ -20,17 +19,8 @@ const Home = () => {
 			}
 
 			setCategories(response.data)
-			setCheckedState(new Array(categories.length).fill(false))
+			setCheckedState(new Array(response.data.length).fill(false))
 		}
-
-		const updatedSelectedCategories = [];
-        categories.filter((item, index)=>{
-            if(checkedState[index]){
-                updatedSelectedCategories.push(item.category_name);
-            }
-        });
-
-		setSelectedCategories(updatedSelectedCategories);
 
 		getCategories()
 		return;
@@ -63,10 +53,14 @@ const Home = () => {
 		
 		setCheckedState(updatedCheckedState);
 		
-		
-		console.log(selectedCategories)
-		//console.log(checkedState);
-		//console.log(position);
+		const updatedSelectedCategories = [];
+        categories.filter((item, index)=>{
+            if(updatedCheckedState[index]){
+                updatedSelectedCategories.push(item.category_name);
+            }
+        });
+
+		setSelectedCategories(updatedSelectedCategories);
 	}
 
 	return(

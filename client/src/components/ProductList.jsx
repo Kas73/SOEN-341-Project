@@ -4,11 +4,18 @@ const ListProducts = ({products, categoryFilter}) => {
    // console.log(products);
     //console.log(categoryFilter);
     var filtered = products;
-    if(categoryFilter.length!=0){
-        var filtered = products.filter((e)=>{return this.categories.indexof(e)}, categoryFilter);
+
+    //Do we have categories to filter on?
+    if(categoryFilter.length != 0){
+        var filtered = products.filter((product)=>{
+            //Only want products that have the categories that are being filtered on
+            return product.categories.filter((category) => {
+                return categoryFilter.indexOf(category) >= 0
+            }) != '' ? true : false
+        });
         
     }
-    
+    console.log(filtered)
     return (
         <div className="grid-container">
             <main className="row">
@@ -16,7 +23,6 @@ const ListProducts = ({products, categoryFilter}) => {
             {filtered && filtered.length > 0 ? (
               
                 filtered.map((product) => {
-                   // console.log(product.categories);
                    
                     return (
                         <div key={product._id} className ="card">

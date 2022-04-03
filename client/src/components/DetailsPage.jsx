@@ -34,6 +34,7 @@ const DetailsPage = () => {
 		if (!cookies.user_name) {
 			window.alert('Please sign in to add to cart');
 			navigation('/login');
+            return
 		}
 
 		const response = await axios.get(`/carts/${cookies.user_name}`);

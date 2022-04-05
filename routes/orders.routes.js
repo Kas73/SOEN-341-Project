@@ -54,5 +54,11 @@ router.post("/orders", (req, res, next) => {
       });
     }
   });
+  
+  router.delete('/orders/:order_id', (req, res, next) => {
+    Orders.findOneAndDelete({ order_id: req.params.order_id })
+      .then((data) => res.json(data))
+      .catch(next);
+  });
           
           module.exports = router;

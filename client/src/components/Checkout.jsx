@@ -1,9 +1,32 @@
 import React, {Component} from "react"
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import CheckoutListRow from "./CheckoutListRow";
 
 
 const Checkout = () => {
 	const [cart, setCart] = useState([]);
+	const [cookies, setCookie] = useCookies();
+
+	useEffect(() => {
+		async function getUserCart() {
+			const response = await axios
+				.get(`/carts/${cookies.user_name}`)
+			
+			if(!response.data) {
+				window.alert("Error while getting products")
+				return
+			}
+
+			console.log(JSON.stringify(response.data.cart))
+			setCart(response.data.cart)
+		}
+
+		getUserCart();
+		return;
+	}, [])
 
 	return (
 	<div className="container">
@@ -13,33 +36,9 @@ const Checkout = () => {
 					<span className='text-muted'>Your cart</span>
 					<span className='badge badge-secondary badge-pill'>3</span>
 				</h4>
-				<ul className='list-group mb-3'>
-					<li className='list-group-item d-flex justify-content-between lh-condensed'>
-						<div>
-							<h6 className='my-0'>Product name</h6>
-							<small className='text-muted'>Brief description</small>
-						</div>
-						<span className='text-muted'>$12</span>
-					</li>
-					<li className='list-group-item d-flex justify-content-between lh-condensed'>
-						<div>
-							<h6 className='my-0'>Second product</h6>
-							<small className='text-muted'>Brief description</small>
-						</div>
-						<span className='text-muted'>$8</span>
-					</li>
-					<li className='list-group-item d-flex justify-content-between lh-condensed'>
-						<div>
-							<h6 className='my-0'>Third item</h6>
-							<small className='text-muted'>Brief description</small>
-						</div>
-						<span className='text-muted'>$5</span>
-					</li>
-					<li className='list-group-item d-flex justify-content-between'>
-						<span>Total (USD)</span>
-						<strong>$20</strong>
-					</li>
-				</ul>
+				<ul className='list-group mb-3'>{
+				cart.map((cartitem)=> {
+					<CheckoutListRow name={cartitem.product_name} quantity={cartitem.quantity} price={cartitem.price}/>})}</ul>
 			</div>
 			<div className='col-md-8 order-md-1'>
 				<h4 className='mb-3'>Billing address</h4>

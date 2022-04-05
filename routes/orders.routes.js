@@ -22,9 +22,8 @@ router.get('/orders/:username', (req, res, next) => {
 });
 
 router.post("/orders", (req, res, next) => {
-    if(req.body.order_id && req.body.order && req.body.addresses && req.body.order_status && req.body.username && req.body.payment_method) {
+    if(req.body.order && req.body.addresses && req.body.order_status && req.body.username && req.body.payment_method) {
       Orders.create({
-          order_id: req.body.order_id,
           order: req.body.order,
           addresses: req.body.addresses,
           order_status: req.body.order_status,
@@ -40,10 +39,10 @@ router.post("/orders", (req, res, next) => {
     }
   });
 
-  router.patch('/orders/:order_id', (req, res, next) => {
-    console.log(`Updating order status for ${req.params.order_id} with following data: ` + JSON.stringify(req.body.cart))
+  router.patch('/orders/:id', (req, res, next) => {
+    console.log(`Updating order status for ${req.params.id} with following data: ` + JSON.stringify(req.body.cart))
     if (req.body.order_id && req.params.order_status) {
-      Orders.findOneAndUpdate({order_id: req.body.order_id}, {
+      Orders.findOneAndUpdate({_id: req.params.id}, {
         order_status
       })
       .then((data) => res.json(data))
@@ -55,8 +54,8 @@ router.post("/orders", (req, res, next) => {
     }
   });
   
-  router.delete('/orders/:order_id', (req, res, next) => {
-    Orders.findOneAndDelete({ order_id: req.params.order_id })
+  router.delete('/orders/:id', (req, res, next) => {
+    Orders.findOneAndDelete({ _id: req.params.id })
       .then((data) => res.json(data))
       .catch(next);
   });

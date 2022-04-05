@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const productRoutes = require('./routes/products.routes');
 const userRoutes = require('./routes/users.routes');
 const cartsRoutes = require('./routes/carts.routes');
+const categoriesRoutes = require('./routes/categories.routes');
+const ordersRoutes = require('./routes/orders.routes');
 require('dotenv').config();
 
 const app = express();
@@ -31,6 +33,8 @@ app.use(express.urlencoded({limit: '6mb'}))
 app.use('/', productRoutes);
 app.use('/', userRoutes);
 app.use('/', cartsRoutes);
+app.use('/', categoriesRoutes);
+app.use('/', ordersRoutes);
 
 app.use((err, req, res, next) => {
 	console.log(err);

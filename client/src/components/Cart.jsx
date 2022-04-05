@@ -14,6 +14,7 @@ function Cart() {
 		if(!cookies.user_name) {
 			window.alert("You must sign in to see your cart")
 			navigation("/login")
+			return
 		}
 
 		async function getUserCart() {
@@ -60,6 +61,13 @@ function Cart() {
 
 	async function decrementQuantity(product_name) {
 		let newCart = cart
+		let curQuantity = newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity
+
+		//To avoid negative numbers, or a zero, check the quantity of the item
+		//If a user wishes to remove an item from their cart, they should click the trash icon
+		if(curQuantity == 1) {
+			return;
+		}
 		newCart.filter(cartItem => cartItem.product_name == product_name)[0].quantity--
 		
 		const task = {

@@ -9,6 +9,7 @@ import Checkout from './components/Checkout';
 import Cart from './components/Cart';
 import DetailsPage from './components/DetailsPage';
 import SearchResults from './components/SearchResults';
+import OrderHistory from './components/OrderHistory';
 import './App.css';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
 					<Route exact path='/cart' element={<Cart />} />
 					<Route exact path='/details/:id' element={<DetailsPage />} />
 					<Route exact path='/search-results/:query' element={<SearchResults />} />
+					<Route exact path='/order-history' element={<OrderHistory />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

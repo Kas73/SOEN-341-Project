@@ -38,7 +38,15 @@ const Checkout = () => {
 				</h4>
 				<ul className='list-group mb-3'>{
 				cart.map((cartitem)=> {
-					<CheckoutListRow name={cartitem.product_name} quantity={cartitem.quantity} price={cartitem.price}/>})}</ul>
+					return(
+						<CheckoutListRow 
+							name={cartitem.product_name} 
+							quantity={cartitem.quantity} 
+							price={cartitem.price}
+						/>
+					);
+					})}
+				</ul>
 			</div>
 			<div className='col-md-8 order-md-1'>
 				<h4 className='mb-3'>Billing address</h4>

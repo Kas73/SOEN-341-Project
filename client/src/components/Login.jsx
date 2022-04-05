@@ -1,24 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-const Login = ({ setLoginInfo }) => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+const Login = () => {
+	const navigation = useNavigate()
+	const [user_name, setUserName] = useState('')
+	const [password, setPassword] = useState('')
+	const [cookies, setCookie] = useCookies('user_name')
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	function createUserCookie() {
+		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
+	}
 
-		if (email === '' || password === '') {
-			if (email === '') alert('Invalid email!');
-			else if (password === '') alert('Invalid password');
-		} else {
-			setLoginInfo({
-				email: email,
-				password: password,
+	async function signUserIn() {
+
+		const task = {
+			user_name: user_name,
+			password: password,
+		};
+
+		if (task.user_name && task.password) {
+			axios
+			.get(`/users/${task.user_name}`)
+			.then((res) => {
+				if (res.data) {
+					//console.log(res.data.password);
+					if (task.password == res.data.password) {
+						console.log(`Logged in as ${task.user_name}`);
+						createUserCookie();
+						navigation('/')
+					}
+				}
+			})
+			.catch((err) => {
+				console.log(err);
 			});
 		}
-		setEmail('');
-		setPassword('');
+
+		
 	};
+
+	useEffect(() => {
+		if(cookies.user_name) {
+			console.log("The cookie user_name exists: " + cookies.user_name)
+			navigation('/')
+		}
+	})
 
 	return (
 		<main className='form-signin'>
@@ -27,16 +55,14 @@ const Login = ({ setLoginInfo }) => {
 
 				<div className='form-floating'>
 					<input
-						type='email'
+						type='user_name'
 						className='form-control'
 						id='floatingInput'
-						placeholder='name@example.com'
-						value={email}
-						onChange={(event) => {
-							setEmail(event.target.value);
-						}}
+						placeholder='Username'
+						value={user_name}
+						onChange={(e) => setUserName(e.target.value)}
 					/>
-					<label htmlFor='floatingInput'>Email address</label>
+					<label htmlFor='floatingInput'>Username</label>
 				</div>
 				<div className='form-floating'>
 					<input
@@ -45,9 +71,7 @@ const Login = ({ setLoginInfo }) => {
 						id='floatingPassword'
 						placeholder='Password'
 						value={password}
-						onChange={(event) => {
-							setPassword(event.target.value);
-						}}
+						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<label htmlFor='floatingPassword'>Password</label>
 				</div>
@@ -59,14 +83,15 @@ const Login = ({ setLoginInfo }) => {
 				</div>
 				<button
 					className='w-100 btn btn-lg btn-primary'
-					type='submit'
-					onClick={handleSubmit}
+					type='button'
+					onClick={signUserIn}
 				>
 					Sign in
 				</button>
 			</form>
 		</main>
 	);
-};
+	
+}
 
 export default Login;

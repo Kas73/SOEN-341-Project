@@ -1,21 +1,51 @@
 import React from 'react';
 
-const ListProducts = ({products}) => {
+const ListProducts = ({products, categoryFilter}) => {
+   // console.log(products);
+    //console.log(categoryFilter);
+    var filtered = products;
+
+    //Do we have categories to filter on?
+    if(categoryFilter.length != 0){
+        var filtered = products.filter((product)=>{
+            //Only want products that have the categories that are being filtered on
+            return product.categories.filter((category) => {
+                return categoryFilter.indexOf(category) >= 0
+            }) != '' ? true : false
+        });
+        
+    }
+    console.log(filtered)
     return (
-        <ul>
-            {products && products.length > 0 ? (
-                products.map((product) => {
+        <div className="grid-container">
+            <main className="row">
+                
+            {filtered && filtered.length > 0 ? (
+              
+                filtered.map((product) => {
+                   
                     return (
-                        <li key={product._id}>
-                            {product.product_name}, ${product.product_price}
-                        </li>
+                        <div key={product._id} className ="card">
+                            <a href={`/details/${product._id}`}>
+                            <img src={product.product_img} alt={product.product_name} />
+                            </a>
+                            <div className="card-body"> 
+                            <a href={`/details/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>
+                        </div>
                     )
+                   
                 })
+            
             ) : (
                 <li>No Products(s) available</li>
             )}
-        </ul>
+            </main>
+        </div>
+    
     )
+            
+       
+    
 }
 
 export default ListProducts;

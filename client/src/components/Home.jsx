@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import ListProducts from './ProductList';
+import Spinner from './layout/Spinner';
 
 const Home = () => {
 	const [products, setProducts] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [checkedState, setCheckedState] = useState([]);
 	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function getCategories() {
@@ -26,24 +28,24 @@ const Home = () => {
 		return;
 	}, [])
 
+
 	useEffect(() => {
 		async function getProducts() {
-			const response = await axios
-				.get('/products')
-			
-			if(!response.data) {
-				window.alert("Error while getting products")
-				return
+			setIsLoading(true);
+			const response = await axios.get('/products');
+
+			if (!response.data) {
+				window.alert('Error while getting products');
+				return;
 			}
 
-			setProducts(response.data)
+			setProducts(response.data);
+			setIsLoading(false);
 		}
 
-		getProducts()
+		getProducts();
 		return;
-	}, [])
-
-
+	}, []);
 	
 
 	function handleCheck (position) {
@@ -86,9 +88,9 @@ const Home = () => {
 				)}
 				</main>
 				
-			<ListProducts products={products} categoryFilter={selectedCategories} />
+			{isLoading ? <Spinner /> : <ListProducts products={products} categoryFilter={selectedCategories} />}
 		</div>
-	)
+		)
 };
 
 export default Home;

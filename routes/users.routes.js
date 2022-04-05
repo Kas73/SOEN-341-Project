@@ -42,6 +42,7 @@ router.post('/users', (req, res, next) => {
 			last_name: req.body.last_name,
 			address: req.body.address,
 			phone_no: req.body.phone_no,
+			payment_method: req.body.payment_method,
 		})
 			.then((data) => res.json(data))
 			.catch(next);

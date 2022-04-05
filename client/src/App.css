@@ -81,44 +81,44 @@
 	grid-template-areas: 'main';
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
-	height: 100%
+	height: 100%;
 }
-main{
+main {
 	grid-area: main;
 	padding: 1rem;
 	background-color: lightgray;
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .card {
-  border: 0.1rem white solid;
-  background-color: white;
-  border-radius: 0.5rem;
-  margin: 0.2rem;
+	border: 0.1rem white solid;
+	background-color: white;
+	border-radius: 0.5rem;
+	margin: 0.2rem;
 }
 .card-body {
-  padding: 0.5rem; 
+	padding: 0.5rem;
 	margin-bottom: 0.2rem;
 }
 
-a{
+a {
 	text-decoration: none;
 	color: black;
 }
-a:hover{
+a:hover {
 	color: orangered;
 }
 
 img {
-  border-radius: 0.5rem;
+	border-radius: 0.5rem;
 	max-width: 29rem;
-  width: 100%;
+	width: 100%;
 }
 .cart {
 	padding: 0 30%;
@@ -127,4 +127,8 @@ img {
 .right-align {
 	position: relative;
 	float: right;
+}
+
+.spinner {
+	text-align: center;
 }

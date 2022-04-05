@@ -1,39 +1,85 @@
 import React from "react";
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const AddNewProduct = () => {
     const oneMegabyteAsBits = 1048576
     const fiveMegabytesAsBits = oneMegabyteAsBits * 5
+    const navigation = useNavigate();
     const [cookies, setCookie] = useCookies()
     const [product_name, setProductName] = useState('')
     const [product_price, setProductPrice] = useState(0);
     const [description, setDescription] = useState('');
     const [product_img, setProductImage] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [checkedState, setCheckedState] = useState([]);
+
+
+    useEffect(() => {
+		async function getCategories() {
+			const response = await axios
+				.get('/categories')
+			
+			if(!response.data) {
+				window.alert("Error while getting categories")
+				return
+			}
+
+			setCategories(response.data)
+			setCheckedState(new Array(categories.length).fill(false))
+		}
+		getCategories()
+		return;
+	}, [])
+    
+    function handleCheck (position) {
+		const updatedCheckedState = checkedState.map((item, index)=>
+		index === position ? !item : item
+		);
+		
+		setCheckedState(updatedCheckedState);
+	}
 
     async function addProductToDatabase() {
+        //If the user is clicking categories too quickly, the state will not update in time
+        //For now, we wait for 3 seconds for the state to be fully updated before adding the product
+        await new Promise(r => setTimeout(r, 3000))
+
         const seller_name = cookies.user_name
+
+        //Database stores array of category names
+        const selectedCategories = [];
+        categories.filter((item, index)=>{
+            if(checkedState[index]){
+                selectedCategories.push(item.category_name);
+            }
+        });
 
         const task = {
             product_name: product_name,
             product_price: product_price,
             description: description,
             seller_name: seller_name,
-            product_img: product_img
+            product_img: product_img,
+            categories: selectedCategories
         }
 
-        if(task.product_name && task.product_price >= 0 && task.description && task.seller_name && task.product_img) {
+        if(task.product_name && task.product_price >= 0 && task.description && task.seller_name && task.product_img && task.categories) {
             const response = await axios
                 .post("/products", task)
             
             if(response.data) {
-                console.log("Product has been added to the database!")
+                window.alert("Product has been added to the database!")
+                navigation('/')
             }
         }
         else {
             console.log("Product name, price, description and an image are required")
         }
+
+        console.log(selectedCategories);
     }
 
     const convertImageToBase64 = (file) => {
@@ -113,6 +159,23 @@ const AddNewProduct = () => {
                 />
                 <img src={product_img} alt="Your image here!" />
             </div>
+            <h4>Categories</h4>
+			<main className="row">
+                {categories && categories.length > 0 ? (
+                    categories.map((v, i) => (
+                        <li key={i}>
+                            <input
+                            type="checkbox"
+                            data-key={v._id}                  
+                            onChange={(e)=>handleCheck(i)}            
+                            checked={checkedState[i]} 
+                            />
+                            <label>{v.category_name}</label>
+                        </li>
+                    ))) : (
+					<li>No Categories</li>
+				)}
+				</main>
             <div className='mb-3 form-check'></div>
             <button
                 type='button'

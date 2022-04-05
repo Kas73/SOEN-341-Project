@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import Checkout from './components/Checkout';
 import Cart from './components/Cart';
 import DetailsPage from './components/DetailsPage';
+import SearchResults from './components/SearchResults';
 import './App.css';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
 					<Route exact path='/checkout' element={<Checkout />} />
 					<Route exact path='/cart' element={<Cart />} />
 					<Route exact path='/details/:id' element={<DetailsPage />} />
+					<Route exact path='/search-results/:query' element={<SearchResults />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

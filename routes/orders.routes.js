@@ -50,7 +50,7 @@ router.post("/orders", (req, res, next) => {
       .catch(next);
     } else {
       res.json({
-        error: 'Name or price is empty',
+        error: 'order_id or order_status is empty',
       });
     }
   });

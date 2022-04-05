@@ -11,23 +11,23 @@ router.get('/orders', (req, res, next) => {
 		.catch(next);
 });
 
-router.get('/orders/:username', (req, res, next) => {
-	console.log(`Getting orders for Username: ${req.params.username}`);
-	Orders.findOne({ username: req.params.username })
+router.get('/orders/:user_name', (req, res, next) => {
+	console.log(`Getting orders for User_name: ${req.params.user_name}`);
+	Orders.findOne({ user_name: req.params.user_name })
 		.then((data) => {
-			console.log('Got orders for ' + req.params.username + ': ' + data);
+			console.log('Got orders for ' + req.params.user_name + ': ' + data);
 			res.json(data);
 		})
 		.catch(next);
 });
 
 router.post("/orders", (req, res, next) => {
-    if(req.body.order && req.body.addresses && req.body.order_status && req.body.username && req.body.payment_method) {
+    if(req.body.order && req.body.addresses && req.body.order_status && req.body.user_name && req.body.payment_method) {
       Orders.create({
           order: req.body.order,
           addresses: req.body.addresses,
           order_status: req.body.order_status,
-          username: req.body.username,
+          user_name: req.body.user_name,
           payment_method: req.body.payment_method})
         .then((data) => res.json(data))
         .catch(next);

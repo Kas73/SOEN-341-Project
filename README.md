@@ -18,7 +18,7 @@ An e-commerce web application that allows users to browse available items, add i
 
 ## Technologies 
 
-The website will be built using the MERN (MongoDB, Express, React and Node) stack. The frontend user interface of the website will be built in React.js and it will use a NoSQL MongoDB database. 
+The website will be built using the MERN (MongoDB, Express, React and Node) stack. The frontend user interface of the website will be built in React.js and it will use a NoSQL MongoDB database. For testing the website uses the Jasmine framework with Karma runner and github actions for the yml workflow.
 
 ## Team members:
 

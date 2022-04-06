@@ -9,6 +9,7 @@ const UserSchema = new Schema({
 	user_name: String,
 	address: String,
 	phone_no: String,
+	isAdmin: Boolean,
 	payment_method: [{card_number: String, cardholder_name: String, expiration: String, billing_address: String}],
 });
 

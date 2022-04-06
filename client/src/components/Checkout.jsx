@@ -10,6 +10,8 @@ const Checkout = () => {
 	const [cookies, setCookie] = useCookies();
 	const [totalPrice, setTotalPrice] = useState(0);
 
+	const [userInfo, setUserInfo] = useState({});
+
 	var priceOfEachProduct = 0;
 	var subtotal = 0;
 	var total = 0;
@@ -29,6 +31,14 @@ const Checkout = () => {
 			setCart(response.data.cart);
 		}
 
+		async function getUser() {
+			const response = await axios.get(`/users/${cookies.user_name}`);
+			if (response.data) {
+				setUserInfo(response.data);
+			}
+		}
+
+		getUser();
 		getUserCart();
 		return;
 	}, []);
@@ -52,6 +62,7 @@ const Checkout = () => {
 							<div className='col-md-6 mb-3'>
 								<label htmlFor='firstName'>First name</label>
 								<input
+									value={userInfo.first_name}
 									type='text'
 									className='form-control'
 									id='firstName'
@@ -66,6 +77,7 @@ const Checkout = () => {
 							<div className='col-md-6 mb-3'>
 								<label htmlFor='lastName'>Last name</label>
 								<input
+									value={userInfo.last_name}
 									type='text'
 									className='form-control'
 									id='lastName'
@@ -86,6 +98,7 @@ const Checkout = () => {
 									<span className='input-group-text'>@</span>
 								</div>
 								<input
+									value={userInfo.user_name}
 									type='text'
 									className='form-control'
 									id='username'
@@ -103,6 +116,7 @@ const Checkout = () => {
 								Email <span className='text-muted'>(Optional)</span>
 							</label>
 							<input
+								value={userInfo.email}
 								type='email'
 								className='form-control'
 								id='email'
@@ -116,6 +130,7 @@ const Checkout = () => {
 						<div className='mb-3'>
 							<label htmlFor='address'>Address</label>
 							<input
+								value={userInfo.address}
 								type='text'
 								className='form-control'
 								id='address'

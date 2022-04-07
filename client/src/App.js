@@ -5,6 +5,7 @@ import AddNewProduct from './components/AddNewProduct';
 import Navbar from './components/layout/Navbar';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import OrderSuccessful from './components/OrderSuccessful';
 import Checkout from './components/Checkout';
 import Cart from './components/Cart';
 import DetailsPage from './components/DetailsPage';
@@ -25,6 +26,7 @@ const App = () => {
 					<Route exact path='/cart' element={<Cart />} />
 					<Route exact path='/details/:id' element={<DetailsPage />} />
 					<Route exact path='/search-results/:query' element={<SearchResults />} />
+					<Route exact path='/ordersuccessful' element={<OrderSuccessful />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

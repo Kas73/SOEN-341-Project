@@ -11,24 +11,32 @@ const OrderHistory = () => {
 	// const [isLoading, setIsLoading] = useState(false);
 	// const { id } = useParams();
 	// const navigation = useNavigate();
+    const [orders, setOrders] = useState({});
+    const [cookies, setCookie] = useCookies();
+    const navigation = useNavigate();
+    
+    useEffect(() => {
+      async function getOrders() {
+        
+        const response = await axios.get(`/orders/${cookies.user_name}`);
 
-	// useEffect(() => {
-	// 	async function getProduct() {
-	// 		setIsLoading(true);
-	// 		const response = await axios.get('/products/' + id);
+        if (!response.data) {
+          window.alert('Could not find orders for user: ' + cookies.user_name);
+          return;
+        }
 
-	// 		if (!response.data) {
-	// 			window.alert('Could not find product with id: ' + id);
-	// 			return;
-	// 		}
+        setOrders(response.data);
+        //setIsLoading(false);
+      }
 
-	// 		setProduct(response.data);
-	// 		setIsLoading(false);
-	// 	}
+      getOrders();
+      return;
+    }, []);
 
-	// 	getProduct();
-	// 	return;
-	// }, []);
+	async function cancelorder(){
+
+
+  }
 
 	
 
@@ -117,6 +125,13 @@ const OrderHistory = () => {
                         <td colspan="2">TOTAL</td>
                         <td class="text-end">$169,98</td>
                       </tr>
+                      <button
+                        className='w-100 btn btn-lg btn-primary'
+                        type='button'
+                        onClick={cancelorder}
+                      >
+                        Cancel Order
+                      </button>
                     </tfoot>
                   </table>
                 </div>

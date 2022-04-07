@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import AddNewProduct from './components/AddNewProduct';
 import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Checkout from './components/Checkout';
@@ -24,8 +25,13 @@ const App = () => {
 					<Route exact path='/checkout' element={<Checkout />} />
 					<Route exact path='/cart' element={<Cart />} />
 					<Route exact path='/details/:id' element={<DetailsPage />} />
-					<Route exact path='/search-results/:query' element={<SearchResults />} />
+					<Route
+						exact
+						path='/search-results/:query'
+						element={<SearchResults />}
+					/>
 				</Routes>
+				<Footer />
 			</div>
 		</BrowserRouter>
 	);

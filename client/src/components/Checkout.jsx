@@ -314,7 +314,7 @@ const Checkout = () => {
 						</div>
 						<hr className='mb-4' />
 						<button className='btn btn-primary btn-lg btn-block' type='submit'>
-							Continue to checkout
+							Proceed to checkout
 						</button>
 					</form>
 				</div>

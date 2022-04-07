@@ -7,7 +7,8 @@ const Navbar = () => {
 	const navigation = useNavigate()
 	const [searchString, setSearchString]= useState("");
 	function logOut() {
-		removeCookie('user_name');
+		removeCookie('user_name')
+		removeCookie('is_admin')
 		navigation('/')
 	}
 
@@ -51,17 +52,19 @@ const Navbar = () => {
 							</li>
 						</React.Fragment>
 					) : (
-						<li className='nav-item'>
+					<li className='nav-item'>
+					<a className='nav-link' href='/cart'>
+						Cart
+					</a>
+				</li>)}
+					{console.log('navbar: '+cookies.is_admin+typeof(cookies.is_admin))}
+					{cookies.is_admin && cookies.is_admin === "true" ? (
+							<li className='nav-item'>
 							<a className='nav-link' href='/create-product'>
-								Add Product (Admin)
+								Add Product
 							</a>
 						</li>
-					)}
-					<li className='nav-item'>
-						<a className='nav-link' href='/cart'>
-							Cart
-						</a>
-					</li>
+					) : null}
 				</ul>
 			</div>
 
@@ -89,12 +92,18 @@ const Navbar = () => {
 						</button>
 					</div>
 					{cookies.user_name ? (
-						<div className='col'>
+						<React.Fragment>
+							<div className='col'>
 							<p>Logged in as: {cookies.user_name}</p>
-							<button className='btn' type='button' onClick={logOut}>
+						
+							
+						</div>
+						
+						<div className='col'>
+						<button className='btn' type='button' onClick={logOut}>
 								Logout
 							</button>
-						</div>
+							</div></React.Fragment>
 					) : null}
 				</div>
 			</form>

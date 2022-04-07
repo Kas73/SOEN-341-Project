@@ -16,6 +16,7 @@ const SignUp = () => {
 
 	function createUserCookie() {
 		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
+		setCookie("is_admin", false, {path: '/', sameSite: 'lax'})
 	}
 
 	async function createNewUser() {
@@ -28,6 +29,7 @@ const SignUp = () => {
 			user_name: user_name,
 			address: address,
 			phone_no: phone_no,
+			is_admin: false
 		};
 
 		if (

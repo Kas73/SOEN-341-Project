@@ -313,11 +313,6 @@ const Checkout = () => {
 							</div>
 						</div>
 						<hr className='mb-4' />
-							<a href='/ordersuccessful'> 
-								<button className='btn btn-primary btn-lg btn-block' type='submit'>
-									Continue to checkout
-								</button>
-							</a>
 					</form>
 				</div>
 				<div className='col-md-6 order-md-2'>
@@ -363,6 +358,9 @@ const Checkout = () => {
 					</table>
 				</div>
 			</div>
+			<a href='/ordersuccessful'>
+				<button className='btn btn-primary right-align w-100'>Order</button>
+			</a>
 		</div>
 	);
 };

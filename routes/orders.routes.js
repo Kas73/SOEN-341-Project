@@ -40,7 +40,7 @@ router.post("/orders", (req, res, next) => {
   });
 
   router.patch('/orders/:id', (req, res, next) => {
-    console.log(`Updating order status for ${req.params.id} with following data: ` + JSON.stringify(req.body.cart))
+    console.log(`Updating order status for ${req.params.id} with following data: ` + JSON.stringify(req.body.order_status))
     if (req.body.order_id && req.params.order_status) {
       Orders.findOneAndUpdate({_id: req.params.id}, {
         order_status

@@ -126,10 +126,15 @@ const DetailsPage = () => {
 										min='1'
 										value={quantity}
 										onChange={(e) => setQuantity(e.target.value)}
+										disabled
 									/>{' '}
 									<button
 										className='btn btn-dark'
-										onClick={(e) => setQuantity(quantity - 1)}
+										onClick={(e) => {
+											if(quantity != 1) {
+												setQuantity(quantity - 1)
+											}
+										}}
 									>
 										-
 									</button>{' '}

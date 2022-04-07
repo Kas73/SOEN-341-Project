@@ -24,17 +24,21 @@ router.get('/orders/:user_name', (req, res, next) => {
 router.post('/orders', (req, res, next) => {
 	if (
 		req.body.order &&
-		req.body.addresses &&
-		req.body.order_status &&
 		req.body.user_name &&
-		req.body.payment_method
+		req.body.card_number &&
+		req.body.cardholder_name &&
+		req.body.expiration &&
+		req.body.billing_address &&
+		req.body.cvv
 	) {
 		Orders.create({
 			order: req.body.order,
-			addresses: req.body.addresses,
-			order_status: req.body.order_status,
 			user_name: req.body.user_name,
-			payment_method: req.body.payment_method,
+			card_number: req.body.card_number,
+			cardholder_name: req.body.cardholder_name,
+			expiration: req.body.expiration,
+			billing_address: req.body.billing_address,
+			cvv: req.body.cvv,
 		})
 			.then((data) => res.json(data))
 			.catch(next);

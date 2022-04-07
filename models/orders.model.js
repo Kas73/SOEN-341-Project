@@ -9,6 +9,7 @@ const OrderSchema = new Schema({
 	cardholder_name: String,
 	expiration: String,
 	billing_address: String,
+	cvv: String,
 });
 
 const Orders = mongoose.model('orders', OrderSchema);

@@ -8,7 +8,7 @@
     "start-watch": "nodemon server.js",
     "dev": "concurrently \"npm run start-watch\" \"cd client && npm start\"",
     "setup": "npm install && cd client && npm install",
-    "test": "karma start"
+    "test": "cd client && npm run test"
   },
   "repository": {
     "type": "git",
@@ -27,17 +27,7 @@
     "mongoose": "^6.2.2"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
     "concurrently": "^7.0.0",
-    "jasmine": "^4.0.2",
-    "jasmine-core": "^4.0.1",
-    "karma": "^6.3.17",
-    "karma-browserify": "^8.1.0",
-    "karma-chrome-launcher": "^3.1.1",
-    "karma-jasmine": "^4.0.2",
-    "karma-jasmine-html-reporter": "^1.7.0",
-    "karma-spec-reporter": "^0.0.33",
-    "nodemon": "^2.0.15",
-    "watchify": "^4.0.0"
+    "nodemon": "^2.0.15"
   }
 }

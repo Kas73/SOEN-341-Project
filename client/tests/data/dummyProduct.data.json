@@ -1,0 +1,61 @@
+{
+    "dummy_product": {
+        "_id":"asdfieie",
+        "product_name": "dummy_product",
+        "product_price": 3.14,
+        "description": "a very silly product",
+        "seller_name": "null_guy",
+        "product_img": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        "categories": [
+            "Art"
+        ]
+    },
+    "dummy_product_list": [
+        {
+            "_id":"feiff",
+            "product_name": "dummy_product_1",
+            "product_price": 3.14,
+            "description": "a very silly product",
+            "seller_name": "null_guy",
+            "product_img": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "categories": [
+                "Art"
+            ]
+        },
+        {
+            "_id":"xyzzy",
+            "product_name": "dummy_product_2",
+            "product_price": 3.14,
+            "description": "a very silly product",
+            "seller_name": "null_guy",
+            "product_img": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "categories": [
+                "Sport"
+            ]
+        },
+        {
+            "_id":"foo",
+            "product_name": "dummy_product_3",
+            "product_price": 3.14,
+            "description": "a very silly product",
+            "seller_name": "null_guy",
+            "product_img": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "categories": [
+                "Food"
+            ]
+        },
+        {
+            "_id":"bar",
+            "product_name": "dummy_product_4",
+            "product_price": 3.14,
+            "description": "a very silly product",
+            "seller_name": "null_guy",
+            "product_img": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+            "categories": [
+                "Art",
+                "Food",
+                "Sport"
+            ]
+        }
+    ]
+}

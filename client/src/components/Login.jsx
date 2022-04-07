@@ -10,7 +10,6 @@ const Login = () => {
 	const [cookies, setCookie] = useCookies('user_name')
 
 	function createUserCookie(is_admin) {
-		console.log(is_admin)
 		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
 		setCookie("is_admin", is_admin, {path: '/', sameSite: 'lax'})
 	}

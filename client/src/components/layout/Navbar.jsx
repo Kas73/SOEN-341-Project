@@ -57,7 +57,7 @@ const Navbar = () => {
 						Cart
 					</a>
 				</li>)}
-					{console.log('navbar: '+cookies.is_admin+typeof(cookies.is_admin))}
+	
 					{cookies.is_admin && cookies.is_admin === "true" ? (
 							<li className='nav-item'>
 							<a className='nav-link' href='/create-product'>

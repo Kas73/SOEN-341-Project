@@ -48,7 +48,8 @@ router.post('/users', (req, res, next) => {
 			.then((data) => { console.log('user is created')
 				res.json(data)								
 			})
-			.catch((err) => {console.log(err)});
+			.catch((err) => {console.log(err)
+			next()});
 	} else {
 		res.json({
 			error: 'Name or price is empty',

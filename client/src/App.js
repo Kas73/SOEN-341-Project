@@ -26,7 +26,7 @@ const App = () => {
 					<Route exact path='/cart' element={<Cart />} />
 					<Route exact path='/details/:id' element={<DetailsPage />} />
 					<Route exact path='/search-results/:query' element={<SearchResults />} />
-					<Route exact path='/ordersuccessful' element={<OrderSuccessful />} />
+					<Route exact path='/order-successful' element={<OrderSuccessful />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

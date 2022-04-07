@@ -403,7 +403,7 @@ const Checkout = () => {
 					</table>
 				</div>
 			</div>
-			<a href='/ordersuccessful'>
+			<a href='/order-successful'>
 				<button
 					onClick={createNewOrder}
 					className='btn btn-primary right-align w-100'

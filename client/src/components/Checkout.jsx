@@ -9,14 +9,55 @@ const Checkout = () => {
 	const [cart, setCart] = useState([]);
 	const [cookies, setCookie] = useCookies();
 	const [totalPrice, setTotalPrice] = useState(0);
-
 	const [userInfo, setUserInfo] = useState({});
+	const [order, setOrder] = useState([]);
+	const [card_number, setCardNumber] = useState('');
+	const [cardholder_name, setCardHolderName] = useState('');
+	const [expiration, setExpiration] = useState('');
+	const [billing_address, setBillingAddress] = useState('');
+	const [cvv, setCvv] = useState('');
 
 	var priceOfEachProduct = 0;
 	var subtotal = 0;
 	var total = 0;
 	const gst = 0.05;
 	const qst = 0.09975;
+
+	async function createNewOrder() {
+		const task = {
+			order: order,
+			user_name: cookies.user_name,
+			card_number: card_number,
+			cardholder_name: cardholder_name,
+			expiration: expiration,
+			billing_address: billing_address,
+			cvv: cvv,
+		};
+
+		console.log(task);
+
+		if (
+			task.order &&
+			task.user_name &&
+			task.card_number &&
+			task.cardholder_name &&
+			task.expiration &&
+			task.billing_address &&
+			task.cvv
+		) {
+			axios
+				.post('/orders', task)
+				.then((res) => {
+					if (res.data) {
+						console.log('Order');
+						console.log(res.data);
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	}
 
 	useEffect(() => {
 		async function getUserCart() {
@@ -29,6 +70,7 @@ const Checkout = () => {
 
 			//console.log(JSON.stringify(response.data.cart));
 			setCart(response.data.cart);
+			setOrder(response.data.cart);
 		}
 
 		async function getUser() {
@@ -56,7 +98,7 @@ const Checkout = () => {
 		<div className='container'>
 			<div className='row'>
 				<div className='col-md-6 order-md-1'>
-					<h4 className='mb-3'>Billing address</h4>
+					<h4 className='mb-3'>Payment details</h4>
 					<form className='needs-validation' noValidate>
 						<div className='row'>
 							<div className='col-md-6 mb-3'>
@@ -128,7 +170,7 @@ const Checkout = () => {
 						</div>
 
 						<div className='mb-3'>
-							<label htmlFor='address'>Address</label>
+							<label htmlFor='address'>Shipping Address</label>
 							<input
 								value={userInfo.address}
 								type='text'
@@ -143,10 +185,9 @@ const Checkout = () => {
 						</div>
 
 						<div className='mb-3'>
-							<label htmlFor='address2'>
-								Address 2 <span className='text-muted'>(Optional)</span>
-							</label>
+							<label htmlFor='address2'>Billing address</label>
 							<input
+								onChange={(e) => setBillingAddress(e.target.value)}
 								type='text'
 								className='form-control'
 								id='address2'
@@ -263,6 +304,7 @@ const Checkout = () => {
 							<div className='col-md-6 mb-3'>
 								<label htmlFor='cc-name'>Name on card</label>
 								<input
+									onChange={(e) => setCardHolderName(e.target.value)}
 									type='text'
 									className='form-control'
 									id='cc-name'
@@ -277,6 +319,7 @@ const Checkout = () => {
 							<div className='col-md-6 mb-3'>
 								<label htmlFor='cc-number'>Credit card number</label>
 								<input
+									onChange={(e) => setCardNumber(e.target.value)}
 									type='text'
 									className='form-control'
 									id='cc-number'
@@ -292,6 +335,7 @@ const Checkout = () => {
 							<div className='col-md-3 mb-3'>
 								<label htmlFor='cc-expiration'>Expiration</label>
 								<input
+									onChange={(e) => setExpiration(e.target.value)}
 									type='text'
 									className='form-control'
 									id='cc-expiration'
@@ -303,6 +347,7 @@ const Checkout = () => {
 							<div className='col-md-3 mb-3'>
 								<label htmlFor='cc-cvv'>CVV</label>
 								<input
+									onChange={(e) => setCvv(e.target.value)}
 									type='text'
 									className='form-control'
 									id='cc-cvv'
@@ -313,9 +358,6 @@ const Checkout = () => {
 							</div>
 						</div>
 						<hr className='mb-4' />
-						<button className='btn btn-primary btn-lg btn-block' type='submit'>
-							Continue to checkout
-						</button>
 					</form>
 				</div>
 				<div className='col-md-6 order-md-2'>
@@ -361,6 +403,14 @@ const Checkout = () => {
 					</table>
 				</div>
 			</div>
+			<a href='/ordersuccessful'>
+				<button
+					onClick={createNewOrder}
+					className='btn btn-primary right-align w-100'
+				>
+					Order
+				</button>
+			</a>
 		</div>
 	);
 };

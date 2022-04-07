@@ -1,6 +1,4 @@
 const express = require("express");
-const req = require("express/lib/request");
-const res = require("express/lib/response");
 const Reviews = require("../models/reviews.model");
 const router = express.Router();
 

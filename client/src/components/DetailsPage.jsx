@@ -34,7 +34,7 @@ const DetailsPage = () => {
 		if (!cookies.user_name) {
 			window.alert('Please sign in to add to cart');
 			navigation('/login');
-            return
+			return;
 		}
 
 		const response = await axios.get(`/carts/${cookies.user_name}`);
@@ -113,15 +113,31 @@ const DetailsPage = () => {
 										${product.product_price}
 										<small class='text-success'></small>
 									</h2>
-									<button onClick={(e) => setQuantity(quantity + 1)}>+</button>
+									<button
+										className='btn btn-dark'
+										onClick={(e) => setQuantity(quantity + 1)}
+									>
+										+
+									</button>{' '}
 									<input
+										style={{ padding: '4px 0' }}
 										type='number'
 										id='quantity'
 										min='1'
 										value={quantity}
 										onChange={(e) => setQuantity(e.target.value)}
-									/>
-									<button onClick={(e) => setQuantity(quantity - 1)}>-</button>
+										disabled
+									/>{' '}
+									<button
+										className='btn btn-dark'
+										onClick={(e) => {
+											if(quantity != 1) {
+												setQuantity(quantity - 1)
+											}
+										}}
+									>
+										-
+									</button>{' '}
 									<button
 										class='btn btn-primary btn-rounded'
 										onClick={addToCart}

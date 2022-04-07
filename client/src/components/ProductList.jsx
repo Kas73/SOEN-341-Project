@@ -6,7 +6,7 @@ const ListProducts = ({products, categoryFilter}) => {
     var filtered = products;
 
     //Do we have categories to filter on?
-    if(categoryFilter.length != 0){
+    if(categoryFilter && categoryFilter.length != 0){
         var filtered = products.filter((product)=>{
             //Only want products that have the categories that are being filtered on
             return product.categories.filter((category) => {
@@ -15,7 +15,7 @@ const ListProducts = ({products, categoryFilter}) => {
         });
         
     }
-    console.log(filtered)
+    //console.log(filtered)
     return (
         <div className="grid-container">
             <main className="row">
@@ -25,12 +25,12 @@ const ListProducts = ({products, categoryFilter}) => {
                 filtered.map((product) => {
                    
                     return (
-                        <div key={product._id} className ="card">
-                            <a href={`/details/${product._id}`}>
-                            <img src={product.product_img} alt={product.product_name} />
+                        <div data-testid='product-entry' key={product._id} className ="card">
+                            <a href={`/details/${product._id}`} data-testid='product-image-link'>
+                            <img src={product.product_img} alt={product.product_name} data-testid='product-image'/>
                             </a>
-                            <div className="card-body"> 
-                            <a href={`/details/${product._id}`}>{product.product_name}</a>, ${product.product_price}</div>
+                            <div className="card-body" data-testid='product-name-and-price'> 
+                            <a href={`/details/${product._id}`} data-testid='product-name-link'>{product.product_name}</a>, ${product.product_price}</div>
                         </div>
                     )
                    

@@ -22,9 +22,9 @@ router.get('/users/:user_name', (req, res, next) => {
 });
 
 router.post('/users', (req, res, next) => {
-	// console.log(
-	// 	`Name: ${req.body.user_name}, price: ${req.body.password}, quantity: ${req.body.email}`
-	// );
+	 console.log(
+		`body: ${JSON.stringify(req.body)}`
+	 );
 	if (
 		req.body.user_name &&
 		req.body.password &&
@@ -42,10 +42,14 @@ router.post('/users', (req, res, next) => {
 			last_name: req.body.last_name,
 			address: req.body.address,
 			phone_no: req.body.phone_no,
+			is_admin: req.body.is_admin,
 			payment_method: req.body.payment_method,
 		})
-			.then((data) => res.json(data))
-			.catch(next);
+			.then((data) => { console.log('user is created')
+				res.json(data)								
+			})
+			.catch((err) => {console.log(err)
+			next()});
 	} else {
 		res.json({
 			error: 'Name or price is empty',

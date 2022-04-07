@@ -9,9 +9,11 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [cookies, setCookie] = useCookies('user_name')
 
-	function createUserCookie() {
+	function createUserCookie(is_admin) {
 		setCookie("user_name", user_name, {path: '/', sameSite: 'lax'})
+		setCookie("is_admin", is_admin, {path: '/', sameSite: 'lax'})
 	}
+
 
 	async function signUserIn() {
 
@@ -28,7 +30,7 @@ const Login = () => {
 					//console.log(res.data.password);
 					if (task.password == res.data.password) {
 						console.log(`Logged in as ${task.user_name}`);
-						createUserCookie();
+						createUserCookie(res.data.is_admin);
 						navigation('/')
 					}
 				}

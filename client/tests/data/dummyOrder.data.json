@@ -1,0 +1,27 @@
+{
+    "dummyOrder": {
+        "_id": "9493949392",
+        "order": [
+            {
+                "product_name": "order_item_1",
+                "price": 10,
+                "quantity": 2
+            },{
+                "product_name": "order_item_2",
+                "price": 40,
+                "quantity": 1
+            },{
+                "product_name": "order_item_3",
+                "price": 450,
+                "quantity": 3
+            }
+        ],
+        "user_name": "dummy_user",
+        "card_number": "0123-4567-8901-2345",
+        "cardholder_name": "dummy user",
+        "expiration": "07/12",
+        "billing_address": "123 not a street",
+        "cvv": "000",
+        "total": 2000
+    }
+}

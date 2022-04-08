@@ -3,12 +3,12 @@ import React from 'react';
 const OrderProductList = ({ products }) => {
 	return products.map((product) => {
 		return (
-			<li>
+			<li data-testid="order-product-item">
 				<strong>
-					<p>{product.product_name}</p>
+					<p data-testid="order-product-name">{product.product_name}</p>
 				</strong>
-				<p>Price: ${product.price}</p>
-				<p>Quantity: {product.quantity}</p>
+				<p data-testid="order-product-price">Price: ${product.price}</p>
+				<p data-testid="order-product-quantity">Quantity: {product.quantity}</p>
 			</li>
 		);
 	});

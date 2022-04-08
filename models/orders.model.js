@@ -10,6 +10,7 @@ const OrderSchema = new Schema({
 	expiration: String,
 	billing_address: String,
 	cvv: String,
+	total: Number,
 });
 
 const Orders = mongoose.model('orders', OrderSchema);

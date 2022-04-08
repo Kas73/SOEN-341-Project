@@ -32,6 +32,7 @@ const Checkout = () => {
 			expiration: expiration,
 			billing_address: billing_address,
 			cvv: cvv,
+			total: totalPrice,
 		};
 
 		console.log(task);
@@ -43,7 +44,8 @@ const Checkout = () => {
 			task.cardholder_name &&
 			task.expiration &&
 			task.billing_address &&
-			task.cvv
+			task.cvv &&
+			task.total
 		) {
 			axios
 				.post('/orders', task)

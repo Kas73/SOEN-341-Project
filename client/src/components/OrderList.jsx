@@ -3,21 +3,21 @@ import OrderProductList from './OrderProductList';
 
 const OrderList = ({ eachOrder, cancelOrder }) => {
 	var products = eachOrder.order;
-	console.log();
 	return (
 		<tr>
-			<td>{eachOrder._id}</td>
+			<td data-testid="order-id">{eachOrder._id}</td>
 			<td>
 				<ol>
 					<OrderProductList products={products} />
 				</ol>
 			</td>
-			<td>${eachOrder.total}</td>
+			<td data-testid="order-total">${eachOrder.total}</td>
 			<td>
 				{' '}
 				<button
 					onClick={(e) => cancelOrder(eachOrder._id)}
 					className='btn btn-dark'
+					data-testid="order-cancel-button"
 				>
 					🗑️
 				</button>{' '}

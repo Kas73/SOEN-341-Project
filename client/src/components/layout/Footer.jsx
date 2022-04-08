@@ -10,7 +10,7 @@ const Footer = () => {
 					</span>
 					<a className='text-muted' href='/' style={{ marginRight: '30px' }}>
 						Home
-					</a>{' '}
+					</a>
 				</div>
 			</footer>
 		</div>

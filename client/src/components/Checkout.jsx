@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import CheckoutListRow from './CheckoutListRow';
 
 const Checkout = () => {
+	const navigation = useNavigate()
 	const [cart, setCart] = useState([]);
 	const [cookies, setCookie] = useCookies();
 	const [totalPrice, setTotalPrice] = useState(0);
@@ -53,6 +54,7 @@ const Checkout = () => {
 					if (res.data) {
 						console.log('Order');
 						console.log(res.data);
+						navigation("/order-successful")
 					}
 				})
 				.catch((err) => {
@@ -304,14 +306,12 @@ const Checkout = () => {
 					</table>
 				</div>
 			</div>
-			<a href='/order-successful'>
 				<button
 					onClick={createNewOrder}
 					className='btn btn-primary right-align w-100'
 				>
 					Order
 				</button>
-			</a>
 		</div>
 	);
 };

@@ -1,0 +1,16 @@
+{
+	"first_name": "first",
+	"last_name": "last",
+	"password": "aPassword",
+	"email": "ex@gmail.com",
+	"user_name": "dummy_user",
+	"address": "123 help street",
+	"phone_no": "401-302-4444",
+	"is_admin": false,
+	"payment_method": [{
+        "card_number": "59595959", 
+        "cardholder_name": "dummy name", 
+        "expiration": "07/10", 
+        "billing_address": "123 help street"
+    }]
+}

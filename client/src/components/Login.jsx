@@ -29,7 +29,7 @@ const Login = () => {
 				if (res.data) {
 					//console.log(res.data.password);
 					if (task.password == res.data.password) {
-						console.log(`Logged in as ${task.user_name}`);
+						window.alert(`Logged in as ${task.user_name}`);
 						createUserCookie(res.data.is_admin);
 						navigation('/')
 					}
@@ -63,8 +63,9 @@ const Login = () => {
 						placeholder='Username'
 						value={user_name}
 						onChange={(e) => setUserName(e.target.value)}
+						data-testid='user-name-form-field'
 					/>
-					<label htmlFor='floatingInput'>Username</label>
+					<label htmlFor='floatingInput' data-testid='user-name-form-label'>Username</label>
 				</div>
 				<div className='form-floating'>
 					<input
@@ -74,8 +75,9 @@ const Login = () => {
 						placeholder='Password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						data-testid='password-form-field'
 					/>
-					<label htmlFor='floatingPassword'>Password</label>
+					<label htmlFor='floatingPassword' data-testid='password-form-label'>Password</label>
 				</div>
 
 				<div className='checkbox mb-3'>
@@ -87,6 +89,7 @@ const Login = () => {
 					className='w-100 btn btn-lg btn-primary'
 					type='button'
 					onClick={signUserIn}
+					data-testid='sign-in-button'
 				>
 					Sign in
 				</button>

@@ -13,7 +13,7 @@ router.get('/orders', (req, res, next) => {
 
 router.get('/orders/:user_name', (req, res, next) => {
 	console.log(`Getting orders for User_name: ${req.params.user_name}`);
-	Orders.findOne({ user_name: req.params.user_name })
+	Orders.find({ user_name: req.params.user_name })
 		.then((data) => {
 			console.log('Got orders for ' + req.params.user_name + ': ' + data);
 			res.json(data);
@@ -29,7 +29,8 @@ router.post('/orders', (req, res, next) => {
 		req.body.cardholder_name &&
 		req.body.expiration &&
 		req.body.billing_address &&
-		req.body.cvv
+		req.body.cvv &&
+		req.body.total
 	) {
 		Orders.create({
 			order: req.body.order,
@@ -39,6 +40,7 @@ router.post('/orders', (req, res, next) => {
 			expiration: req.body.expiration,
 			billing_address: req.body.billing_address,
 			cvv: req.body.cvv,
+			total: req.body.total,
 		})
 			.then((data) => res.json(data))
 			.catch(next);

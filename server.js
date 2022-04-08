@@ -5,6 +5,7 @@ const userRoutes = require('./routes/users.routes');
 const cartsRoutes = require('./routes/carts.routes');
 const categoriesRoutes = require('./routes/categories.routes');
 const ordersRoutes = require('./routes/orders.routes');
+const reviewsRoutes = require('./routes/reviews.routes')
 require('dotenv').config();
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/', userRoutes);
 app.use('/', cartsRoutes);
 app.use('/', categoriesRoutes);
 app.use('/', ordersRoutes);
+app.use('/', reviewsRoutes);
 
 app.use((err, req, res, next) => {
 	console.log(err);

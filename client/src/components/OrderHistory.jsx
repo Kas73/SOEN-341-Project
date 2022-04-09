@@ -59,6 +59,9 @@ const OrderHistory = () => {
 					)}
 				</tbody>
 			</table>
+			<a href='/review-products'>
+				<button className='btn btn-dark w-25'>Leave a rating on one of your orders</button>
+			</a>
 		</main>
 	);
 };

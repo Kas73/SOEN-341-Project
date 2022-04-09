@@ -9,8 +9,8 @@ const OrderSuccessful = () => {
 			<a href='/order-history'>
 				<button className='btn btn-dark w-25 '>View your order history</button>
 			</a>{' '}
-			<a href='/ratings'>
-				<button className='btn btn-dark w-25'>Ratings</button>
+			<a href='/review-products'>
+				<button className='btn btn-dark w-25'>Leave a rating</button>
 			</a>
 		</div>
 	);
